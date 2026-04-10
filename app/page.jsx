@@ -101,9 +101,9 @@ const SERVICES = [
     border: "border-emerald-500/30",
     title: "ERP Sistem Entegrasyonu",
     subtitle: "ERP Integration",
-    desc: "Mevcut SAP B1, Logo, Netsis, Mikro ve diğer ERP sistemlerinizle sorunsuz entegrasyon sağlıyoruz. Veri tekrarı ve manuel aktarım artık geçmişte kalıyor.",
+    desc: "Mevcut SAP, Logo, Netsis, Mikro ve diğer ERP sistemlerinizle sorunsuz entegrasyon sağlıyoruz. Veri tekrarı ve manuel aktarım artık geçmişte kalıyor.",
     bullets: [
-      "SAP B1, Logo, Netsis, Mikro entegrasyonları",
+      "SAP, Logo, Netsis, Mikro entegrasyonları",
       "Middleware & API geliştirme",
       "Veri temizleme & migrasyon",
       "Çoklu sistem senkronizasyonu",
@@ -135,7 +135,7 @@ const SERVICES = [
     subtitle: "FSC Certification",
     desc: "Kağıt & ambalaj sektöründe FSC™ denetimleri için tam dijital altyapı kuruyoruz. Kütle balansı ve lot takibi artık otomatik.",
     bullets: [
-      "Malzeme takip otomasyonu",
+      "Kütle balans otomasyonu",
       "Lot bazlı geriye dönük izleme",
       "FSC sertifika kontrol sistemi",
       "Denetim hazırlık danışmanlığı",
@@ -640,7 +640,7 @@ export default function App() {
             {/* Tag */}
             <div className="inline-flex items-center gap-2 px-4 py-2 mb-10 text-[10px] font-black tracking-[0.3em] uppercase rounded-full" style={{ color: '#fb923c', backgroundColor: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.25)' }}>
               <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: '#f97316' }} />
-              
+              Endüstriyel Dijital Dönüşüm Uzmanları
             </div>
 
             {/* Headline */}
@@ -714,7 +714,7 @@ export default function App() {
                 {[
                   { t: "Hızlı Adaptasyon", d: "Karmaşık sistemleri personelin en kolay kullanacağı hale getiriyoruz. Değişim direncini anlıyor, yönetiyoruz." },
                   { t: "Ölçülebilir Sonuç", d: "Sistemi kurup gitmiyoruz. Verimlilik artışını rakamlarla kanıtlıyoruz, KPI'ları birlikte takip ediyoruz." },
-                  { t: "Çok Sistemli Uzmanlık", d: "Netsis'ten Logo'ya, WMS'ten planogram yazılımlarına — farklı platform deneyimimiz ile doğru sistemi seçiyoruz." },
+                  { t: "Çok Sistemli Uzmanlık", d: "SAP'tan Logo'ya, WMS'ten planogram yazılımlarına — farklı platform deneyimimiz ile doğru sistemi seçiyoruz." },
                 ].map((item, i) => (
                   <div key={i} className="flex gap-5 items-start group">
                     <div className="w-10 h-10 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0 group-hover:bg-orange-500/20 transition-colors">
@@ -1042,10 +1042,10 @@ export default function App() {
                 FSC™ Denetimlerine<br /><span className="text-green-600 italic">Dijital Hazırlık</span>
               </h2>
               <p className="text-xl text-slate-500 font-light leading-relaxed mb-10">
-                Acore Ambalaj gibi sektörün öncü firmalarında uyguladığımız FSC™ standartlarına tam uyumlu dijital takip altyapısını fabrikanıza taşıyoruz. Lot takibi ve FSC takip süreçleri artık sizin için bir yük olmaktan çıkacak.
+                Acore Ambalaj gibi sektörün öncü firmalarında uyguladığımız FSC™ standartlarına tam uyumlu dijital takip altyapısını fabrikanıza taşıyoruz. Lot takibi ve kütle balansı artık sizin için bir yük olmaktan çıkacak.
               </p>
               <div className="space-y-3">
-                {['Malzeme Takip Formu', 'Lot Bazlı Geriye Dönük İzleme', 'FSC Sertifika Kontrol Sistemi', 'Denetim Hazırlık Danışmanlığı'].map((item, i) => (
+                {['Kütle Balans Otomasyonu', 'Lot Bazlı Geriye Dönük İzleme', 'FSC Sertifika Kontrol Sistemi', 'Denetim Hazırlık Danışmanlığı'].map((item, i) => (
                   <div key={i} className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-green-200 hover:bg-green-50/50 transition-all">
                     <div className="w-8 h-8 rounded-xl bg-green-100 flex items-center justify-center shrink-0">
                       <span className="text-green-600 font-black text-sm">✓</span>
