@@ -559,7 +559,7 @@ export default function App() {
         <div className="container mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
           <button onClick={() => scroll('top')} className="flex items-center group">
-            <img src="/logo-main.svg" alt="ARD Sistem Logo" height="64" style={{ height: '64px', width: 'auto' }} />
+            <img src="/logo-main.svg" alt="ARD Sistem Logo" style={{ height: '90px', width: 'auto' }} />
           </button>
 
           {/* Desktop Nav */}
@@ -600,8 +600,14 @@ export default function App() {
 
       {/* ── HERO ── */}
       <section id="top" className="relative min-h-screen flex items-center overflow-hidden" style={{ backgroundColor: '#05080f' }}>
+        {/* BG image */}
+        <div className="absolute inset-0 z-0">
+          <img src="/tedarik_zinciri.png" alt="" className="w-full h-full object-cover" style={{ opacity: 0.15 }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, #05080f 50%, transparent 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #05080f 10%, transparent 60%)' }} />
+        </div>
         {/* BG grid */}
-        <div className="absolute inset-0 z-0" style={{ opacity: 0.04, backgroundImage: 'repeating-linear-gradient(0deg, #fff 0px, transparent 1px, transparent 60px), repeating-linear-gradient(90deg, #fff 0px, transparent 1px, transparent 60px)' }} />
+        <div className="absolute inset-0 z-0" style={{ opacity: 0.03, backgroundImage: 'repeating-linear-gradient(0deg, #fff 0px, transparent 1px, transparent 60px), repeating-linear-gradient(90deg, #fff 0px, transparent 1px, transparent 60px)' }} />
         {/* BG glow */}
         <div className="absolute top-1/4 right-0 w-[700px] h-[700px] rounded-full z-0" style={{ background: 'radial-gradient(circle, rgba(234,88,12,0.12) 0%, transparent 70%)' }} />
         <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full z-0" style={{ background: 'radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%)' }} />
@@ -702,33 +708,19 @@ export default function App() {
 
             {/* Visual side */}
             <div className="relative">
-              <div className="absolute -inset-8 rounded-[3rem] bg-gradient-to-br from-orange-600/10 to-transparent" />
-              <div className="relative bg-slate-900/80 border border-white/8 rounded-[3rem] p-10 space-y-4">
-                <div className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-500 mb-6">Canlı Operasyon Özeti</div>
-                {[
-                  { label: "Stok Doğruluğu", val: 98.4, color: "#f97316" },
-                  { label: "Sipariş Karşılama Oranı", val: 97.1, color: "#3b82f6" },
-                  { label: "Depo Kapasite Verimliliği", val: 91.8, color: "#8b5cf6" },
-                  { label: "Tedarikçi Zamanlaması", val: 94.3, color: "#10b981" },
-                ].map((row, i) => (
-                  <div key={i}>
-                    <div className="flex justify-between text-xs font-bold mb-1.5">
-                      <span className="text-slate-400 uppercase tracking-wider">{row.label}</span>
-                      <span style={{ color: row.color }}>{row.val}%</span>
-                    </div>
-                    <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                      <div
-                        className="h-full rounded-full transition-all duration-1000"
-                        style={{ width: `${row.val}%`, background: row.color }}
-                      />
-                    </div>
-                  </div>
-                ))}
-                <div className="border-t border-white/5 pt-6 mt-6 grid grid-cols-3 gap-4">
+              <div className="absolute -inset-4 rounded-[3rem]" style={{ background: 'linear-gradient(135deg, rgba(249,115,22,0.15) 0%, transparent 70%)' }} />
+              <img
+                src="/stok.png"
+                alt="ARD Sistem saha operasyonu"
+                className="relative z-10 w-full rounded-[2.5rem] object-cover"
+                style={{ height: '520px', boxShadow: '0 32px 80px rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)' }}
+              />
+              <div className="absolute bottom-6 left-6 right-6 z-20 p-5 rounded-2xl" style={{ backgroundColor: 'rgba(5,8,15,0.85)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                <div className="grid grid-cols-3 gap-4">
                   {[{ v: "↓ 28%", l: "Stok Fazlası" }, { v: "↑ 45%", l: "Sevkiyat Hızı" }, { v: "↓ 19%", l: "İade Oranı" }].map((m, i) => (
                     <div key={i} className="text-center">
                       <div className="text-xl font-black text-white">{m.v}</div>
-                      <div className="text-[8px] uppercase tracking-[0.2em] text-slate-600 font-bold mt-1">{m.l}</div>
+                      <div className="text-[8px] uppercase tracking-[0.2em] font-bold mt-1" style={{ color: '#64748b' }}>{m.l}</div>
                     </div>
                   ))}
                 </div>
@@ -778,35 +770,24 @@ export default function App() {
               </div>
             </div>
 
-            {/* Integration flow visual */}
-            <div className="bg-slate-900 rounded-[3rem] p-10 text-white">
-              <div className="text-[9px] font-black uppercase tracking-[0.3em] text-emerald-400 mb-8">Entegrasyon Mimarisi</div>
-              <div className="space-y-3">
-                {[
-                  { layer: "Veri Kaynakları", items: ["WMS", "Üretim", "Satış"], color: "#10b981" },
-                  { layer: "ARD Middleware", items: ["API Gateway", "Dönüşüm", "Validasyon"], color: "#f97316" },
-                  { layer: "ERP & Raporlama", items: ["ERP Core", "BI / Dashboard", "Arşiv"], color: "#3b82f6" },
-                ].map((row, i) => (
-                  <div key={i}>
-                    <div className="text-[8px] font-black uppercase tracking-widest mb-2" style={{ color: row.color }}>{row.layer}</div>
-                    <div className="grid grid-cols-3 gap-2">
-                      {row.items.map(item => (
-                        <div key={item} className="bg-slate-800 rounded-xl px-3 py-3 text-center text-xs font-bold text-slate-300 border border-white/5">
-                          {item}
-                        </div>
-                      ))}
+            {/* Integration visual */}
+            <div className="relative">
+              <img
+                src="/uretim_planlama.png"
+                alt="ERP entegrasyon saha"
+                className="w-full rounded-[2.5rem] object-cover"
+                style={{ height: '500px', boxShadow: '0 24px 60px rgba(0,0,0,0.15)', border: '1px solid rgba(16,185,129,0.2)' }}
+              />
+              <div className="absolute bottom-6 left-6 right-6 p-5 rounded-2xl" style={{ backgroundColor: 'rgba(5,8,15,0.88)', backdropFilter: 'blur(12px)', border: '1px solid rgba(16,185,129,0.2)' }}>
+                <div className="text-[8px] font-black uppercase tracking-widest text-emerald-400 mb-3">Entegrasyon Sonuçları</div>
+                <div className="grid grid-cols-3 gap-3">
+                  {[{ v: "0", l: "Manuel Aktarım" }, { v: "↑10x", l: "Veri Hızı" }, { v: "%99.9", l: "Senkronizasyon" }].map((m, i) => (
+                    <div key={i} className="text-center">
+                      <div className="text-xl font-black text-white">{m.v}</div>
+                      <div className="text-[8px] uppercase tracking-widest font-bold mt-1" style={{ color: '#475569' }}>{m.l}</div>
                     </div>
-                    {i < 2 && (
-                      <div className="flex justify-center my-2">
-                        <div className="text-slate-600 text-xs">↕</div>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <div className="mt-8 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl">
-                <div className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1">Sonuç</div>
-                <div className="text-sm text-slate-300">Manuel veri aktarımı sıfır. Gerçek zamanlı senkronizasyon ile karar hızı 10 kat artar.</div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -818,29 +799,23 @@ export default function App() {
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             {/* Visual first on desktop */}
-            <div className="order-2 lg:order-1">
-              <div className="bg-amber-50 border border-amber-100 rounded-[3rem] p-10">
-                <div className="text-[9px] font-black uppercase tracking-[0.3em] text-amber-600 mb-6">Planogram Analiz Paneli</div>
-                <div className="space-y-3">
-                  {[
-                    { cat: "Kahvaltılıklar", pct: 88, sales: "↑ %23" },
-                    { cat: "İçecekler", pct: 72, sales: "↑ %18" },
-                    { cat: "Atıştırmalık", pct: 91, sales: "↑ %31" },
-                    { cat: "Fırın Ürünleri", pct: 64, sales: "↑ %12" },
-                    { cat: "Temizlik", pct: 79, sales: "↑ %9" },
-                  ].map((row, i) => (
-                    <div key={i} className="bg-white rounded-xl p-4 flex items-center gap-4 border border-amber-100">
-                      <div className="w-24 shrink-0">
-                        <div className="text-xs font-bold text-slate-700 truncate">{row.cat}</div>
-                      </div>
-                      <div className="flex-1 h-2 bg-amber-100 rounded-full overflow-hidden">
-                        <div className="h-full bg-amber-500 rounded-full" style={{ width: `${row.pct}%` }} />
-                      </div>
-                      <div className="text-xs font-black text-amber-600 w-16 text-right shrink-0">{row.sales}</div>
+            <div className="order-2 lg:order-1 relative">
+              <img
+                src="/planogram.png"
+                alt="Planogram saha uygulaması"
+                className="w-full rounded-[2.5rem] object-cover"
+                style={{ height: '480px', boxShadow: '0 24px 60px rgba(0,0,0,0.15)', border: '1px solid rgba(245,158,11,0.2)' }}
+              />
+              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(12px)', border: '1px solid rgba(245,158,11,0.2)' }}>
+                <div className="text-[8px] font-black uppercase tracking-[0.3em] text-amber-600 mb-2">Raf Optimizasyonu Sonrası</div>
+                <div className="grid grid-cols-3 gap-3">
+                  {[{ v: "↑ %31", l: "Satış Artışı" }, { v: "↓ %15", l: "Ölü Stok" }, { v: "↑ %23", l: "Kategori Geliri" }].map((m, i) => (
+                    <div key={i} className="text-center">
+                      <div className="text-lg font-black text-amber-600">{m.v}</div>
+                      <div className="text-[8px] uppercase tracking-widest font-bold text-slate-500">{m.l}</div>
                     </div>
                   ))}
                 </div>
-                <div className="mt-6 text-xs text-amber-600/60 font-bold uppercase tracking-widest text-center">Raf optimizasyonu sonrası kategori satış değişimi</div>
               </div>
             </div>
 
@@ -906,6 +881,21 @@ export default function App() {
               Güvendikleri<br /><span className="text-orange-500 italic">Firmalar</span>
             </h2>
           </div>
+
+          {/* Hero image */}
+          <div className="relative rounded-[2.5rem] overflow-hidden mb-14" style={{ height: '360px' }}>
+            <img src="/depo_stok.png" alt="ARD Sistem referans operasyon" className="w-full h-full object-cover" style={{ opacity: 0.7 }} />
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(2,6,23,0.95) 0%, rgba(2,6,23,0.4) 60%, transparent 100%)' }} />
+            <div className="absolute inset-0 flex items-center px-14">
+              <div>
+                <div className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-500 mb-4">20+ Yıl Saha Deneyimi</div>
+                <div className="text-4xl md:text-5xl font-black text-white uppercase tracking-tight leading-tight max-w-lg">
+                  Teoriyle Değil,<br /><span className="text-orange-400">Sahada</span> Kanıtladık
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {PARTNERS.map((p, i) => (
               <div key={i} className="bg-slate-900/80 border border-white/8 rounded-3xl p-10 hover:border-orange-500/30 transition-all group">
