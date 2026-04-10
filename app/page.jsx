@@ -101,9 +101,9 @@ const SERVICES = [
     border: "border-emerald-500/30",
     title: "ERP Sistem Entegrasyonu",
     subtitle: "ERP Integration",
-    desc: "Mevcut SAP, Logo, Netsis, Mikro ve diğer ERP sistemlerinizle sorunsuz entegrasyon sağlıyoruz. Veri tekrarı ve manuel aktarım artık geçmişte kalıyor.",
+    desc: "Mevcut SAP B1, Logo, Netsis, Mikro ve diğer ERP sistemlerinizle sorunsuz entegrasyon sağlıyoruz. Veri tekrarı ve manuel aktarım artık geçmişte kalıyor.",
     bullets: [
-      "SAP, Logo, Netsis, Mikro entegrasyonları",
+      "SAP B1, Logo, Netsis, Mikro entegrasyonları",
       "Middleware & API geliştirme",
       "Veri temizleme & migrasyon",
       "Çoklu sistem senkronizasyonu",
@@ -135,7 +135,7 @@ const SERVICES = [
     subtitle: "FSC Certification",
     desc: "Kağıt & ambalaj sektöründe FSC™ denetimleri için tam dijital altyapı kuruyoruz. Kütle balansı ve lot takibi artık otomatik.",
     bullets: [
-      "Kütle balans otomasyonu",
+      "Malzeme takip otomasyonu",
       "Lot bazlı geriye dönük izleme",
       "FSC sertifika kontrol sistemi",
       "Denetim hazırlık danışmanlığı",
@@ -640,7 +640,7 @@ export default function App() {
             {/* Tag */}
             <div className="inline-flex items-center gap-2 px-4 py-2 mb-10 text-[10px] font-black tracking-[0.3em] uppercase rounded-full" style={{ color: '#fb923c', backgroundColor: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.25)' }}>
               <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: '#f97316' }} />
-              Endüstriyel Dijital Dönüşüm Uzmanları
+              
             </div>
 
             {/* Headline */}
@@ -897,25 +897,84 @@ export default function App() {
               </div>
             </div>
 
-            {/* Integration visual */}
-            <div className="relative">
-              <img
-                src="/uretim_saha.png"
-                alt="ERP entegrasyon saha"
-                className="w-full rounded-[2.5rem] object-cover"
-                style={{ height: '500px', boxShadow: '0 24px 60px rgba(0,0,0,0.15)', border: '1px solid rgba(16,185,129,0.2)' }}
-              />
-              <div className="absolute bottom-6 left-6 right-6 p-5 rounded-2xl" style={{ backgroundColor: 'rgba(5,8,15,0.88)', backdropFilter: 'blur(12px)', border: '1px solid rgba(16,185,129,0.2)' }}>
-                <div className="text-[8px] font-black uppercase tracking-widest text-emerald-400 mb-3">Entegrasyon Sonuçları</div>
-                <div className="grid grid-cols-3 gap-3">
-                  {[{ v: "0", l: "Manuel Aktarım" }, { v: "↑10x", l: "Veri Hızı" }, { v: "%99.9", l: "Senkronizasyon" }].map((m, i) => (
-                    <div key={i} className="text-center">
-                      <div className="text-xl font-black text-white">{m.v}</div>
-                      <div className="text-[8px] uppercase tracking-widest font-bold mt-1" style={{ color: '#475569' }}>{m.l}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            {/* Integration visual — inline SVG */}
+            <div className="relative rounded-[2.5rem] overflow-hidden" style={{ background: '#0a0f1e', border: '1px solid rgba(249,115,22,0.2)' }}>
+              <style>{`
+                @keyframes flowRight { 0%{stroke-dashoffset:48} 100%{stroke-dashoffset:0} }
+                @keyframes erpSpin { to{transform:rotate(360deg)} }
+                .erp-fr  { stroke-dasharray:8 6; animation: flowRight 1.6s linear infinite; }
+                .erp-fr2 { stroke-dasharray:8 6; animation: flowRight 2.2s linear infinite; }
+                .erp-fr3 { stroke-dasharray:8 6; animation: flowRight 2.8s linear infinite; }
+                .erp-hub-ring { transform-origin:340px 210px; animation: erpSpin 12s linear infinite; }
+              `}</style>
+              <svg width="100%" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <marker id="ea1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                    <path d="M2 1L8 5L2 9" fill="none" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </marker>
+                  <marker id="ea2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                    <path d="M2 1L8 5L2 9" fill="none" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </marker>
+                </defs>
+                <rect x="0" y="0" width="680" height="420" rx="20" fill="#0a0f1e"/>
+                <rect x="10" y="10" width="660" height="400" rx="16" fill="none" stroke="#f97316" strokeWidth="0.5" opacity="0.2"/>
+                <circle cx="340" cy="210" r="68" fill="none" stroke="#f97316" strokeWidth="0.5" opacity="0.15"/>
+                <circle cx="340" cy="210" r="90" fill="none" stroke="#f97316" strokeWidth="0.5" opacity="0.08"/>
+                <circle cx="340" cy="210" r="110" fill="none" stroke="#f97316" strokeWidth="0.3" opacity="0.06"/>
+                <g className="erp-hub-ring">
+                  <circle cx="340" cy="120" r="3" fill="#f97316" opacity="0.6"/>
+                  <circle cx="430" cy="210" r="3" fill="#f97316" opacity="0.6"/>
+                  <circle cx="340" cy="300" r="3" fill="#f97316" opacity="0.6"/>
+                  <circle cx="250" cy="210" r="3" fill="#f97316" opacity="0.6"/>
+                </g>
+                <circle cx="340" cy="210" r="52" fill="#111827"/>
+                <circle cx="340" cy="210" r="52" fill="none" stroke="#f97316" strokeWidth="1.5" opacity="0.6"/>
+                <circle cx="340" cy="210" r="44" fill="none" stroke="#f97316" strokeWidth="0.5" opacity="0.3"/>
+                <text x="340" y="204" textAnchor="middle" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="13" fill="#f97316" letterSpacing="1">ARD</text>
+                <text x="340" y="220" textAnchor="middle" fontFamily="Arial,sans-serif" fontSize="8" fill="#fb923c" letterSpacing="3" opacity="0.8">MİDDLEWARE</text>
+                {[
+                  { x1:185, y1:90,  x2:292, y2:170, cls:"erp-fr"  },
+                  { x1:185, y1:155, x2:288, y2:192, cls:"erp-fr2" },
+                  { x1:185, y1:220, x2:288, y2:210, cls:"erp-fr3" },
+                  { x1:185, y1:285, x2:290, y2:230, cls:"erp-fr"  },
+                  { x1:185, y1:345, x2:292, y2:252, cls:"erp-fr2" },
+                ].map((l,i) => <line key={i} className={l.cls} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke="#f97316" strokeWidth="1.5" fill="none" markerEnd="url(#ea1)"/>)}
+                {[
+                  { x1:392, y1:174, x2:496, y2:100, cls:"erp-fr"  },
+                  { x1:395, y1:192, x2:496, y2:160, cls:"erp-fr3" },
+                  { x1:392, y1:210, x2:496, y2:218, cls:"erp-fr2" },
+                  { x1:392, y1:228, x2:496, y2:278, cls:"erp-fr"  },
+                  { x1:392, y1:248, x2:496, y2:338, cls:"erp-fr3" },
+                ].map((l,i) => <line key={i} className={l.cls} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke="#3b82f6" strokeWidth="1.5" fill="none" markerEnd="url(#ea2)"/>)}
+                {[
+                  { y:68,  title:"WMS / Depo",     sub:"Anlık stok hareketi" },
+                  { y:133, title:"Satış Sistemi",   sub:"Sipariş & fatura" },
+                  { y:198, title:"Üretim MES",      sub:"İş emri & kapasite" },
+                  { y:263, title:"Tedarikçi EDI",   sub:"Sipariş & teslimat" },
+                  { y:323, title:"E-Ticaret",       sub:"Online siparişler" },
+                ].map((r,i) => (
+                  <g key={i}>
+                    <rect x="30" y={r.y} width="152" height="44" rx="10" fill="#111827" stroke="#f97316" strokeWidth="0.8" opacity="0.9"/>
+                    <text x="106" y={r.y+20} textAnchor="middle" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="11" fill="#fff">{r.title}</text>
+                    <text x="106" y={r.y+35} textAnchor="middle" fontFamily="Arial,sans-serif" fontSize="9" fill="#64748b">{r.sub}</text>
+                  </g>
+                ))}
+                {[
+                  { y:78,  title:"ERP Core",      sub:"SAP, Logo, Netsis" },
+                  { y:138, title:"BI Dashboard",   sub:"Gerçek zamanlı KPI" },
+                  { y:198, title:"Raporlama",      sub:"Yönetici raporları" },
+                  { y:258, title:"Muhasebe",       sub:"Otomatik kayıt" },
+                  { y:318, title:"Arşiv / Log",    sub:"Denetim izi" },
+                ].map((r,i) => (
+                  <g key={i}>
+                    <rect x="498" y={r.y} width="152" height="44" rx="10" fill="#111827" stroke="#3b82f6" strokeWidth="0.8" opacity="0.9"/>
+                    <text x="574" y={r.y+20} textAnchor="middle" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="11" fill="#fff">{r.title}</text>
+                    <text x="574" y={r.y+35} textAnchor="middle" fontFamily="Arial,sans-serif" fontSize="9" fill="#64748b">{r.sub}</text>
+                  </g>
+                ))}
+                <text x="106" y="400" textAnchor="middle" fontFamily="Arial,sans-serif" fontSize="9" fill="#475569" letterSpacing="3">KAYNAK SİSTEMLER</text>
+                <text x="574" y="400" textAnchor="middle" fontFamily="Arial,sans-serif" fontSize="9" fill="#475569" letterSpacing="3">HEDEF SİSTEMLER</text>
+              </svg>
             </div>
           </div>
         </div>
