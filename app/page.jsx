@@ -1042,7 +1042,7 @@ export default function App() {
                 FSC™ Denetimlerine<br /><span className="text-green-600 italic">Dijital Hazırlık</span>
               </h2>
               <p className="text-xl text-slate-500 font-light leading-relaxed mb-10">
-                Acore Ambalaj gibi sektörün öncü firmalarında uyguladığımız FSC™ standartlarına tam uyumlu dijital takip altyapısını fabrikanıza taşıyoruz. Lot takibi ve kütle balansı artık sizin için bir yük olmaktan çıkacak.
+                Acore Ambalaj gibi sektörün öncü firmalarında uyguladığımız FSC™ standartlarına tam uyumlu dijital takip altyapısını fabrikanıza taşıyoruz. Lot takibi ve FSC takip süreçleri artık sizin için bir yük olmaktan çıkacak.
               </p>
               <div className="space-y-3">
                 {['Kütle Balans Otomasyonu', 'Lot Bazlı Geriye Dönük İzleme', 'FSC Sertifika Kontrol Sistemi', 'Denetim Hazırlık Danışmanlığı'].map((item, i) => (
