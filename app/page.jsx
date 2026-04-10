@@ -714,7 +714,7 @@ export default function App() {
                 {[
                   { t: "Hızlı Adaptasyon", d: "Karmaşık sistemleri personelin en kolay kullanacağı hale getiriyoruz. Değişim direncini anlıyor, yönetiyoruz." },
                   { t: "Ölçülebilir Sonuç", d: "Sistemi kurup gitmiyoruz. Verimlilik artışını rakamlarla kanıtlıyoruz, KPI'ları birlikte takip ediyoruz." },
-                  { t: "Çok Sistemli Uzmanlık", d: "SAP'tan Logo'ya, WMS'ten planogram yazılımlarına — farklı platform deneyimimiz ile doğru sistemi seçiyoruz." },
+                  { t: "Çok Sistemli Uzmanlık", d: "Netsis'ten Logo'ya, WMS'ten planogram yazılımlarına — farklı platform deneyimimiz ile doğru sistemi seçiyoruz." },
                 ].map((item, i) => (
                   <div key={i} className="flex gap-5 items-start group">
                     <div className="w-10 h-10 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0 group-hover:bg-orange-500/20 transition-colors">
