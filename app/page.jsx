@@ -1045,7 +1045,7 @@ export default function App() {
                 Acore Ambalaj gibi sektörün öncü firmalarında uyguladığımız FSC™ standartlarına tam uyumlu dijital takip altyapısını fabrikanıza taşıyoruz. Lot takibi ve FSC takip süreçleri artık sizin için bir yük olmaktan çıkacak.
               </p>
               <div className="space-y-3">
-                {['Kütle Balans Otomasyonu', 'Lot Bazlı Geriye Dönük İzleme', 'FSC Sertifika Kontrol Sistemi', 'Denetim Hazırlık Danışmanlığı'].map((item, i) => (
+                {['Malzeme Takip Formu', 'Lot Bazlı Geriye Dönük İzleme', 'FSC Sertifika Kontrol Sistemi', 'Denetim Hazırlık Danışmanlığı'].map((item, i) => (
                   <div key={i} className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-green-200 hover:bg-green-50/50 transition-all">
                     <div className="w-8 h-8 rounded-xl bg-green-100 flex items-center justify-center shrink-0">
                       <span className="text-green-600 font-black text-sm">✓</span>
