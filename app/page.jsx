@@ -12,6 +12,7 @@ const BRAND = {
 const NAV_LINKS = [
   { label: "Neden Biz?", id: "neden-biz" },
   { label: "Çözümler", id: "cozumler" },
+  { label: "Tedarik Zinciri", id: "tedarik" },
   { label: "Üretim Planlama", id: "uretim" },
   { label: "ERP Entegrasyon", id: "erp" },
   { label: "Planogram", id: "planogram" },
@@ -20,8 +21,8 @@ const NAV_LINKS = [
 
 const STATS = [
   { value: "20+", label: "Yıl Saha Deneyimi" },
-  { value: "%45", label: "Operasyonel Verimlilik Artışı" },
-  { value: "30+", label: "Başarılı Proje" },
+  { value: "%41", label: "Operasyonel Verimlilik Artışı" },
+  { value: "28+", label: "Başarılı Proje" },
   { value: "7/24", label: "Teknik Destek" },
 ]
 
@@ -639,7 +640,7 @@ export default function App() {
             {/* Tag */}
             <div className="inline-flex items-center gap-2 px-4 py-2 mb-10 text-[10px] font-black tracking-[0.3em] uppercase rounded-full" style={{ color: '#fb923c', backgroundColor: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.25)' }}>
               <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: '#f97316' }} />
-              Endüstriyel Dijital Dönüşüm Uzmanları
+             
             </div>
 
             {/* Headline */}
@@ -650,7 +651,7 @@ export default function App() {
             </h1>
 
             <p className="text-lg md:text-2xl font-light leading-relaxed max-w-3xl mb-14" style={{ color: '#94a3b8' }}>
-              Tedarik zincirinden depoya, ERP entegrasyonundan planograma — üretim ve perakende operasyonlarınızı gerçek veriyle yönetmenizi sağlıyoruz.
+              Tedarik zincirinden depoya, üretim planlamadan ERP entegrasyonuna, planogramdan raporlamaya — operasyonlarınızın her katmanını gerçek veriyle yönetmenizi sağlıyoruz.
             </p>
 
             {/* CTAs */}
@@ -767,6 +768,58 @@ export default function App() {
             </p>
           </div>
           <ServicesPanel />
+        </div>
+      </section>
+
+      {/* ── TEDARİK ZİNCİRİ ── */}
+      <section id="tedarik" className="py-32 bg-white border-t border-slate-100 text-slate-900">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <div>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-600">Tedarik Zinciri Yönetimi</span>
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mt-4 mb-8">
+                Tedarikten<br /><span className="text-orange-600 italic">Teslimata</span><br />Tam Kontrol
+              </h2>
+              <p className="text-xl text-slate-500 font-light leading-relaxed mb-10">
+                Tedarikçiden müşteriye uzanan tüm zinciri şeffaflaştırıyoruz. Stok kesintilerini, gecikmeleri ve maliyet kaçaklarını gerçek zamanlı verilerle kontrol altına alıyoruz.
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {[
+                  'Tedarikçi performans analizi',
+                  'Talep tahmini & sipariş optimizasyonu',
+                  'Lojistik maliyet analizi',
+                  'Kritik stok uyarı sistemleri',
+                  'Tedarik süreci otomasyonu',
+                  'Çoklu tedarikçi karşılaştırma',
+                ].map((p, i) => (
+                  <div key={i} className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-orange-200 hover:bg-orange-50/50 transition-all group">
+                    <div className="w-2 h-2 rounded-full bg-orange-500 shrink-0" />
+                    <span className="text-sm font-bold text-slate-700 group-hover:text-orange-700 transition-colors">{p}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-3 gap-4 mt-10 p-6 rounded-2xl bg-orange-50 border border-orange-100">
+                {[{ v: "↓32%", l: "Stok Kesintisi" }, { v: "↑28%", l: "Sipariş İsabeti" }, { v: "↓18%", l: "Lojistik Maliyet" }].map((m, i) => (
+                  <div key={i} className="text-center">
+                    <div className="text-2xl font-black text-orange-600">{m.v}</div>
+                    <div className="text-[8px] uppercase tracking-widest font-bold text-slate-500 mt-1">{m.l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative">
+              <img
+                src="/tedarik_zinciri.png"
+                alt="Tedarik zinciri operasyon"
+                className="w-full rounded-[2.5rem] object-cover"
+                style={{ height: '540px', boxShadow: '0 24px 60px rgba(0,0,0,0.12)', border: '1px solid rgba(249,115,22,0.2)' }}
+              />
+              <div className="absolute top-6 left-6 px-4 py-2 rounded-full font-black text-xs uppercase tracking-widest" style={{ backgroundColor: 'rgba(234,88,12,0.9)', color: '#fff' }}>
+                🔗 Supply Chain Control Tower
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
