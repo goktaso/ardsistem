@@ -58,6 +58,22 @@ const SERVICES = [
     ]
   },
   {
+    id: "uretim",
+    icon: "🏗️",
+    color: "#e879f9",
+    bg: "from-fuchsia-600/20 to-fuchsia-500/5",
+    border: "border-fuchsia-500/30",
+    title: "Üretim Planlama",
+    subtitle: "Production Planning",
+    desc: "Üretim hattından çıkan verinin anlık takibini yapıyor, kapasite planlamasını optimize ediyor ve duruş sürelerini minimize ediyoruz. Saha gerçekliğini yönetim masasına taşıyoruz.",
+    bullets: [
+      "Üretim emri & iş takibi",
+      "Kapasite & kaynak planlaması",
+      "Duruş analizi ve OEE takibi",
+      "Hammadde & yarı mamul yönetimi",
+    ]
+  },
+  {
     id: "raporlama",
     icon: "📊",
     color: "#8b5cf6",
@@ -65,12 +81,14 @@ const SERVICES = [
     border: "border-violet-500/30",
     title: "Raporlama & İş Zekası",
     subtitle: "Reporting & BI",
-    desc: "Verinin içinde boğulmak yerine kararları yönlendiren öngörüler üretiyoruz. Operasyonel dashboardlardan yönetim raporlarına tek platform.",
+    desc: "Verinin içinde boğulmak yerine kararları yönlendiren öngörüler üretiyoruz. Operasyonel dashboardlardan yönetim raporlarına tek platform. Doğru veri, doğru anda, doğru kişiye.",
     bullets: [
       "Gerçek zamanlı KPI dashboardları",
       "Özelleştirilebilir yönetici raporları",
       "Trend analizi ve sapma raporları",
       "Power BI / Excel entegrasyonu",
+      "Otomatik periyodik raporlama",
+      "Çok boyutlu satış & stok analizleri",
     ]
   },
   {
@@ -123,6 +141,7 @@ const SERVICES = [
   },
 ]
 
+
 const PARTNERS = [
   { name: "TESCOKIPA", industry: "Perakende & Lojistik", desc: "Geniş ölçekli depo operasyonu ve tedarik zinciri optimizasyonu" },
   { name: "ACORE AMBALAJ", industry: "Kağıt & Ambalaj", desc: "FSC™ uyumlu dijital takip altyapısı ve ERP entegrasyonu" },
@@ -170,6 +189,7 @@ function StatCard({ value, label, animate }) {
 const SERVICE_METRICS = {
   tedarik:   [{ v: "↓32%", l: "Stok Kesintisi" }, { v: "↑28%", l: "Sipariş İsabeti" }, { v: "↓18%", l: "Lojistik Maliyet" }],
   depo:      [{ v: "98.4%", l: "Stok Doğruluğu" }, { v: "↑45%", l: "Sevkiyat Hızı" }, { v: "↓22%", l: "Fire Oranı" }],
+  uretim:    [{ v: "↑38%", l: "OEE Artışı" }, { v: "↓25%", l: "Duruş Süresi" }, { v: "↑42%", l: "Kapasite Verimliliği" }],
   raporlama: [{ v: "7/24", l: "Canlı Dashboard" }, { v: "↑60%", l: "Karar Hızı" }, { v: "100%", l: "Özelleştirme" }],
   erp:       [{ v: "0", l: "Manuel Aktarım" }, { v: "↑10x", l: "Veri Hızı" }, { v: "%99.9", l: "Senkronizasyon" }],
   planogram: [{ v: "↑31%", l: "Raf Geliri" }, { v: "↓15%", l: "Ölü Stok" }, { v: "↑23%", l: "Kategori Satışı" }],
@@ -362,6 +382,7 @@ function WhatsAppWidget() {
 const SERVICE_OPTIONS = [
   { id: "tedarik",   label: "Tedarik Zinciri Yönetimi",  icon: "🔗" },
   { id: "depo",      label: "Depo & Stok Yönetimi",       icon: "🏭" },
+  { id: "uretim",    label: "Üretim Planlama",             icon: "🏗️" },
   { id: "raporlama", label: "Raporlama & İş Zekası",      icon: "📊" },
   { id: "erp",       label: "ERP Sistem Entegrasyonu",    icon: "⚙️" },
   { id: "planogram", label: "Planogram Yönetimi",         icon: "🗂️" },
@@ -652,7 +673,7 @@ export default function App() {
 
             {/* Mini badges */}
             <div className="flex flex-wrap gap-3 mt-12">
-              {['Tedarik Zinciri', 'Depo Yönetimi', 'Raporlama & BI', 'ERP Entegrasyon', 'Planogram', 'FSC™ Uyum'].map(t => (
+              {['Tedarik Zinciri', 'Depo Yönetimi', 'Üretim Planlama', 'Raporlama & BI', 'ERP Entegrasyon', 'Planogram', 'FSC™ Uyum'].map(t => (
                 <span key={t} className="text-[9px] font-bold uppercase tracking-[0.25em] rounded-full px-4 py-2" style={{ color: '#64748b', backgroundColor: 'rgba(30,41,59,0.6)', border: '1px solid rgba(255,255,255,0.07)' }}>{t}</span>
               ))}
             </div>
@@ -840,6 +861,53 @@ export default function App() {
                     {item}
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FSC ── */}
+      <section id="fsc" className="py-32 bg-white border-t border-slate-100 text-slate-900">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <div>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-green-600">Ambalaj Sektörü Uzmanlığı</span>
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mt-4 mb-8">
+                FSC™ Denetimlerine<br /><span className="text-green-600 italic">Dijital Hazırlık</span>
+              </h2>
+              <p className="text-xl text-slate-500 font-light leading-relaxed mb-10">
+                Acore Ambalaj gibi sektörün öncü firmalarında uyguladığımız FSC™ standartlarına tam uyumlu dijital takip altyapısını fabrikanıza taşıyoruz. Lot takibi ve kütle balansı artık sizin için bir yük olmaktan çıkacak.
+              </p>
+              <div className="space-y-3">
+                {['Kütle Balans Otomasyonu', 'Lot Bazlı Geriye Dönük İzleme', 'FSC Sertifika Kontrol Sistemi', 'Denetim Hazırlık Danışmanlığı'].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-green-200 hover:bg-green-50/50 transition-all">
+                    <div className="w-8 h-8 rounded-xl bg-green-100 flex items-center justify-center shrink-0">
+                      <span className="text-green-600 font-black text-sm">✓</span>
+                    </div>
+                    <span className="font-bold text-sm uppercase tracking-wider text-slate-700">{item}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-3 gap-4 mt-10 p-6 rounded-2xl bg-green-50 border border-green-100">
+                {[{ v: "0", l: "Denetim Açığı" }, { v: "100%", l: "Lot İzleme" }, { v: "↓80%", l: "Hazırlık Süresi" }].map((m, i) => (
+                  <div key={i} className="text-center">
+                    <div className="text-2xl font-black text-green-600">{m.v}</div>
+                    <div className="text-[8px] uppercase tracking-widest font-bold text-slate-500 mt-1">{m.l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative">
+              <img
+                src="/fsc.png"
+                alt="FSC denetim uyumu saha"
+                className="w-full rounded-[2.5rem] object-cover"
+                style={{ height: '540px', boxShadow: '0 24px 60px rgba(0,0,0,0.12)', border: '1px solid rgba(34,197,94,0.2)' }}
+              />
+              <div className="absolute top-6 left-6 px-4 py-2 rounded-full font-black text-xs uppercase tracking-widest" style={{ backgroundColor: 'rgba(34,197,94,0.9)', color: '#fff' }}>
+                🌿 FSC™ Sertifikalı Süreç
               </div>
             </div>
           </div>
