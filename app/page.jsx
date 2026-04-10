@@ -12,6 +12,7 @@ const BRAND = {
 const NAV_LINKS = [
   { label: "Neden Biz?", id: "neden-biz" },
   { label: "Çözümler", id: "cozumler" },
+  { label: "Üretim Planlama", id: "uretim" },
   { label: "ERP Entegrasyon", id: "erp" },
   { label: "Planogram", id: "planogram" },
   { label: "Referanslar", id: "referanslar" },
@@ -766,6 +767,58 @@ export default function App() {
             </p>
           </div>
           <ServicesPanel />
+        </div>
+      </section>
+
+      {/* ── ÜRETİM PLANLAMA ── */}
+      <section id="uretim" className="py-32 bg-white border-t border-slate-100 text-slate-900">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <div className="order-2 lg:order-1 relative">
+              <img
+                src="/uretim_saha.png"
+                alt="Üretim planlama saha"
+                className="w-full rounded-[2.5rem] object-cover"
+                style={{ height: '500px', boxShadow: '0 24px 60px rgba(0,0,0,0.12)', border: '1px solid rgba(232,121,249,0.2)' }}
+              />
+              <div className="absolute bottom-6 left-6 right-6 p-5 rounded-2xl" style={{ backgroundColor: 'rgba(5,8,15,0.88)', backdropFilter: 'blur(12px)', border: '1px solid rgba(232,121,249,0.2)' }}>
+                <div className="text-[8px] font-black uppercase tracking-widest mb-3" style={{ color: '#e879f9' }}>Üretim Verimliliği</div>
+                <div className="grid grid-cols-3 gap-3">
+                  {[{ v: "↑38%", l: "OEE Artışı" }, { v: "↓25%", l: "Duruş Süresi" }, { v: "↑42%", l: "Kapasite" }].map((m, i) => (
+                    <div key={i} className="text-center">
+                      <div className="text-xl font-black text-white">{m.v}</div>
+                      <div className="text-[8px] uppercase tracking-widest font-bold mt-1" style={{ color: '#475569' }}>{m.l}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="order-1 lg:order-2">
+              <span className="text-[10px] font-black uppercase tracking-[0.4em]" style={{ color: '#e879f9' }}>Üretim Planlama</span>
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mt-4 mb-8">
+                Sahayı<br /><span className="italic" style={{ color: '#e879f9' }}>Tam Kontrolde</span><br />Tut
+              </h2>
+              <p className="text-xl text-slate-500 font-light leading-relaxed mb-10">
+                Üretim hattından çıkan verinin anlık takibini yapıyor, kapasite planlamasını optimize ediyor ve duruş sürelerini minimize ediyoruz. Saha gerçekliğini yönetim masasına taşıyoruz.
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {[
+                  'Üretim emri & iş takibi',
+                  'Kapasite & kaynak planlaması',
+                  'Duruş analizi ve OEE takibi',
+                  'Hammadde & yarı mamul yönetimi',
+                  'Vardiya & personel planlaması',
+                  'Gerçek zamanlı üretim dashboardı',
+                ].map((p, i) => (
+                  <div key={i} className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-fuchsia-200 hover:bg-fuchsia-50/50 transition-all group">
+                    <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: '#e879f9' }} />
+                    <span className="text-sm font-bold text-slate-700 group-hover:text-fuchsia-700 transition-colors">{p}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
