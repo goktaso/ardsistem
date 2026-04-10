@@ -21,8 +21,8 @@ const NAV_LINKS = [
 
 const STATS = [
   { value: "20+", label: "Yıl Saha Deneyimi" },
-  { value: "%41", label: "Operasyonel Verimlilik Artışı" },
-  { value: "28+", label: "Başarılı Proje" },
+  { value: "%45", label: "Operasyonel Verimlilik Artışı" },
+  { value: "30+", label: "Başarılı Proje" },
   { value: "7/24", label: "Teknik Destek" },
 ]
 
@@ -640,7 +640,7 @@ export default function App() {
             {/* Tag */}
             <div className="inline-flex items-center gap-2 px-4 py-2 mb-10 text-[10px] font-black tracking-[0.3em] uppercase rounded-full" style={{ color: '#fb923c', backgroundColor: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.25)' }}>
               <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: '#f97316' }} />
-             
+              Endüstriyel Dijital Dönüşüm Uzmanları
             </div>
 
             {/* Headline */}
@@ -829,7 +829,7 @@ export default function App() {
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <div className="order-2 lg:order-1 relative">
               <img
-                src="/uretim_saha.png"
+                src="/uretim_planlama.png"
                 alt="Üretim planlama saha"
                 className="w-full rounded-[2.5rem] object-cover"
                 style={{ height: '500px', boxShadow: '0 24px 60px rgba(0,0,0,0.12)', border: '1px solid rgba(232,121,249,0.2)' }}
@@ -900,7 +900,7 @@ export default function App() {
             {/* Integration visual */}
             <div className="relative">
               <img
-                src="/uretim_planlama.png"
+                src="/uretim_saha.png"
                 alt="ERP entegrasyon saha"
                 className="w-full rounded-[2.5rem] object-cover"
                 style={{ height: '500px', boxShadow: '0 24px 60px rgba(0,0,0,0.15)', border: '1px solid rgba(16,185,129,0.2)' }}
