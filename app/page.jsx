@@ -2,8 +2,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 
 const BRAND = {
+  name: "Özay Göktaş",
   phone: "+90 532 302 02 50",
-  email: "info@ardsistem.net.tr",
+  email: "iletisim@ardsistem.net.tr",
   address: "İzmir, Türkiye",
   whatsapp: "+905323020250"
 }
@@ -557,16 +558,8 @@ export default function App() {
       <nav className={`fixed top-0 w-full z-[100] transition-all duration-500 ${scrolled ? 'backdrop-blur-xl border-b border-white/5 py-4' : 'bg-transparent py-6'}`} style={scrolled ? { backgroundColor: 'rgba(5,8,15,0.96)' } : {}}>
         <div className="container mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
-          <button onClick={() => scroll('top')} className="flex items-center gap-3 group">
-            <div className="w-10 h-8 bg-white rounded-lg flex items-center justify-center p-1 shrink-0">
-              <div className="w-full h-full bg-orange-600 rounded flex items-center justify-center">
-                <span className="text-white text-[8px] font-black leading-none">ARD</span>
-              </div>
-            </div>
-            <div>
-              <div className="text-lg font-black tracking-tighter uppercase leading-none">ARD<span className="text-orange-500">SİSTEM</span></div>
-              <div className="text-[7px] font-bold tracking-[0.35em] uppercase text-orange-500/70">Danışmanlık & Teknoloji</div>
-            </div>
+          <button onClick={() => scroll('top')} className="flex items-center group">
+            <img src="/logo-main.svg" alt="ARD Sistem Logo" height="64" style={{ height: '64px', width: 'auto' }} />
           </button>
 
           {/* Desktop Nav */}
@@ -776,7 +769,7 @@ export default function App() {
                 Depo yazılımınız, muhasebe programınız ve ERP'niz ayrı dillerde konuşuyor mu? Tüm sistemleri tek bir veri akışına bağlıyoruz.
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
-                {['SAP Business One', 'Logo Tiger / Go', 'Netsis ERP', 'Mikro ERP', 'Özel / Legacy Sistemler', 'WMS / TMS Entegrasyonu'].map((p, i) => (
+                {['SAP Business One', 'Logo Tiger 3', 'Netsis ERP', 'Micro ERP', 'Özel / Legacy Sistemler', 'WMS / TMS Entegrasyonu'].map((p, i) => (
                   <div key={i} className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-emerald-200 hover:bg-emerald-50/50 transition-all group">
                     <div className="w-2 h-2 rounded-full bg-emerald-500" />
                     <span className="text-sm font-bold text-slate-700 group-hover:text-emerald-700 transition-colors">{p}</span>
@@ -832,7 +825,7 @@ export default function App() {
                   {[
                     { cat: "Kahvaltılıklar", pct: 88, sales: "↑ %23" },
                     { cat: "İçecekler", pct: 72, sales: "↑ %18" },
-                    { cat: "Şaşırt­malık", pct: 91, sales: "↑ %31" },
+                    { cat: "Atıştırmalık", pct: 91, sales: "↑ %31" },
                     { cat: "Fırın Ürünleri", pct: 64, sales: "↑ %12" },
                     { cat: "Temizlik", pct: 79, sales: "↑ %9" },
                   ].map((row, i) => (
@@ -944,6 +937,22 @@ export default function App() {
             </p>
           </div>
 
+            {/* Contact person */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-10 p-6 rounded-2xl" style={{ backgroundColor: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <div className="w-14 h-14 rounded-full flex items-center justify-center font-black text-lg shrink-0" style={{ backgroundColor: 'rgba(249,115,22,0.2)', border: '2px solid rgba(249,115,22,0.4)', color: '#f97316' }}>ÖG</div>
+            <div className="text-center sm:text-left">
+              <div className="font-black text-white text-base uppercase tracking-wide">{BRAND.name}</div>
+              <div className="text-[10px] font-bold uppercase tracking-widest mt-0.5" style={{ color: 'rgba(255,255,255,0.45)' }}>Yetkili Danışman</div>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 sm:ml-auto">
+              <a href={`tel:${BRAND.phone}`} className="text-xs font-black px-4 py-2 rounded-full transition-all" style={{ backgroundColor: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.15)' }}>
+                📞 {BRAND.phone}
+              </a>
+              <a href={`mailto:${BRAND.email}`} className="text-xs font-black px-4 py-2 rounded-full transition-all" style={{ backgroundColor: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.15)' }}>
+                ✉️ {BRAND.email}
+              </a>
+            </div>
+          </div>
           <ContactSelector />
 
           <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-16 font-bold uppercase tracking-widest text-[10px]" style={{ color: 'rgba(255,255,255,0.5)' }}>
@@ -955,22 +964,21 @@ export default function App() {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="py-14 border-t border-white/5" style={{ backgroundColor: '#05080f' }}>
+      <footer className="py-14 border-t border-white/10" style={{ backgroundColor: '#0d1117' }}>
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           <div>
-            <div className="text-2xl font-black uppercase tracking-tighter text-white">ARD<span className="text-orange-500">SİSTEM</span></div>
-            <div className="text-[8px] font-bold uppercase tracking-[0.4em] text-slate-600 mt-1">Endüstriyel Danışmanlık & Teknoloji</div>
+            <img src="/logo-main.svg" alt="ARD Sistem Logo" style={{ height: '70px', width: 'auto' }} />
           </div>
-          <div className="flex flex-wrap justify-center gap-8 text-[9px] font-black uppercase tracking-widest text-slate-600">
+          <div className="flex flex-wrap justify-center gap-8 text-[9px] font-black uppercase tracking-widest" style={{ color: '#94a3b8' }}>
             {NAV_LINKS.map(l => (
               <button key={l.id} onClick={() => scroll(l.id)} className="hover:text-orange-500 transition-colors">{l.label}</button>
             ))}
           </div>
           <div className="text-center md:text-right">
-            <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-700 mb-3">© {new Date().getFullYear()} ARD SİSTEM</div>
-            <div className="flex gap-4 justify-center md:justify-end text-[9px] font-black uppercase tracking-widest text-slate-700">
-              <a href="#" className="hover:text-slate-400 transition-colors">KVKK</a>
-              <a href="#" className="hover:text-slate-400 transition-colors">Çerez Politikası</a>
+            <div className="text-[9px] font-bold uppercase tracking-[0.2em] mb-3" style={{ color: '#64748b' }}>© {new Date().getFullYear()} ARD SİSTEM</div>
+            <div className="flex gap-4 justify-center md:justify-end text-[9px] font-black uppercase tracking-widest" style={{ color: '#64748b' }}>
+              <a href="#" className="hover:text-slate-300 transition-colors">KVKK</a>
+              <a href="#" className="hover:text-slate-300 transition-colors">Çerez Politikası</a>
             </div>
           </div>
         </div>
