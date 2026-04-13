@@ -587,15 +587,20 @@ function SectionNav() {
 
   return (
     <div
-      className="hidden lg:flex flex-col items-center gap-2.5"
+      className="hidden lg:flex flex-col items-center gap-3"
       style={{
         position: 'fixed',
-        right: '24px',
+        right: '20px',
         top: '50%',
         transform: 'translateY(-50%)',
         zIndex: 200,
         opacity: visible ? 1 : 0,
         transition: 'opacity 0.6s ease',
+        backgroundColor: 'rgba(5,8,15,0.5)',
+        backdropFilter: 'blur(8px)',
+        borderRadius: '20px',
+        padding: '10px 8px',
+        border: '1px solid rgba(249,115,22,0.15)',
       }}
     >
       {NAV_SECTIONS.map((s, i) => (
@@ -610,18 +615,19 @@ function SectionNav() {
             <div
               style={{
                 position: 'absolute',
-                right: '22px',
+                right: '26px',
                 whiteSpace: 'nowrap',
-                backgroundColor: 'rgba(5,8,15,0.92)',
+                backgroundColor: 'rgba(5,8,15,0.95)',
                 color: '#f97316',
                 fontSize: '10px',
                 fontWeight: '700',
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
-                padding: '4px 10px',
-                borderRadius: '6px',
-                border: '1px solid rgba(249,115,22,0.3)',
+                padding: '5px 12px',
+                borderRadius: '8px',
+                border: '1px solid rgba(249,115,22,0.4)',
                 pointerEvents: 'none',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
               }}
             >
               {s.label}
@@ -632,22 +638,30 @@ function SectionNav() {
           <button
             onClick={() => scrollTo(s.id)}
             style={{
-              width: active === i ? '12px' : '8px',
-              height: active === i ? '12px' : '8px',
+              width: active === i ? '14px' : '10px',
+              height: active === i ? '14px' : '10px',
               borderRadius: '50%',
-              backgroundColor: active === i ? '#f97316' : 'transparent',
-              border: `1.5px solid ${active === i ? '#f97316' : 'rgba(249,115,22,0.4)'}`,
+              backgroundColor: active === i ? '#f97316' : 'rgba(249,115,22,0.25)',
+              border: `2px solid ${active === i ? '#f97316' : 'rgba(249,115,22,0.6)'}`,
               cursor: 'pointer',
               transition: 'all 0.3s ease',
               padding: 0,
               display: 'block',
-              boxShadow: active === i ? '0 0 8px rgba(249,115,22,0.5)' : 'none',
+              boxShadow: active === i ? '0 0 10px rgba(249,115,22,0.7), 0 0 20px rgba(249,115,22,0.3)' : '0 0 4px rgba(249,115,22,0.2)',
             }}
             onMouseEnter={e => {
-              if (active !== i) e.currentTarget.style.backgroundColor = 'rgba(249,115,22,0.4)'
+              if (active !== i) {
+                e.currentTarget.style.backgroundColor = 'rgba(249,115,22,0.55)'
+                e.currentTarget.style.borderColor = '#f97316'
+                e.currentTarget.style.transform = 'scale(1.2)'
+              }
             }}
             onMouseLeave={e => {
-              if (active !== i) e.currentTarget.style.backgroundColor = 'transparent'
+              if (active !== i) {
+                e.currentTarget.style.backgroundColor = 'rgba(249,115,22,0.25)'
+                e.currentTarget.style.borderColor = 'rgba(249,115,22,0.6)'
+                e.currentTarget.style.transform = 'scale(1)'
+              }
             }}
           />
         </div>
