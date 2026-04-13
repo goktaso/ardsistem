@@ -596,11 +596,11 @@ function SectionNav() {
         zIndex: 200,
         opacity: visible ? 1 : 0,
         transition: 'opacity 0.6s ease',
-        backgroundColor: 'rgba(5,8,15,0.5)',
-        backdropFilter: 'blur(8px)',
+        backgroundColor: 'rgba(255,255,255,0.08)',
+        backdropFilter: 'blur(10px)',
         borderRadius: '20px',
         padding: '10px 8px',
-        border: '1px solid rgba(249,115,22,0.15)',
+        border: '1px solid rgba(255,255,255,0.15)',
       }}
     >
       {NAV_SECTIONS.map((s, i) => (
@@ -617,17 +617,17 @@ function SectionNav() {
                 position: 'absolute',
                 right: '26px',
                 whiteSpace: 'nowrap',
-                backgroundColor: 'rgba(5,8,15,0.95)',
-                color: '#f97316',
+                backgroundColor: 'rgba(255,255,255,0.95)',
+                color: '#1e293b',
                 fontSize: '10px',
                 fontWeight: '700',
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
                 padding: '5px 12px',
                 borderRadius: '8px',
-                border: '1px solid rgba(249,115,22,0.4)',
+                border: '1px solid rgba(255,255,255,0.3)',
                 pointerEvents: 'none',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
               }}
             >
               {s.label}
@@ -641,25 +641,23 @@ function SectionNav() {
               width: active === i ? '14px' : '10px',
               height: active === i ? '14px' : '10px',
               borderRadius: '50%',
-              backgroundColor: active === i ? '#f97316' : 'rgba(249,115,22,0.25)',
-              border: `2px solid ${active === i ? '#f97316' : 'rgba(249,115,22,0.6)'}`,
+              backgroundColor: active === i ? '#ffffff' : 'rgba(255,255,255,0.25)',
+              border: `2px solid ${active === i ? '#ffffff' : 'rgba(255,255,255,0.5)'}`,
               cursor: 'pointer',
               transition: 'all 0.3s ease',
               padding: 0,
               display: 'block',
-              boxShadow: active === i ? '0 0 10px rgba(249,115,22,0.7), 0 0 20px rgba(249,115,22,0.3)' : '0 0 4px rgba(249,115,22,0.2)',
+              boxShadow: active === i ? '0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.2)' : 'none',
             }}
             onMouseEnter={e => {
               if (active !== i) {
-                e.currentTarget.style.backgroundColor = 'rgba(249,115,22,0.55)'
-                e.currentTarget.style.borderColor = '#f97316'
+                e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.6)'
                 e.currentTarget.style.transform = 'scale(1.2)'
               }
             }}
             onMouseLeave={e => {
               if (active !== i) {
-                e.currentTarget.style.backgroundColor = 'rgba(249,115,22,0.25)'
-                e.currentTarget.style.borderColor = 'rgba(249,115,22,0.6)'
+                e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.25)'
                 e.currentTarget.style.transform = 'scale(1)'
               }
             }}
