@@ -548,6 +548,114 @@ function ContactSelector() {
   )
 }
 
+const NAV_SECTIONS = [
+  { id: 'top',        label: 'Ana Sayfa' },
+  { id: 'neden-biz',  label: 'Neden Biz?' },
+  { id: 'cozumler',   label: 'Çözümler' },
+  { id: 'tedarik',    label: 'Tedarik Zinciri' },
+  { id: 'uretim',     label: 'Üretim Planlama' },
+  { id: 'erp',        label: 'ERP Entegrasyon' },
+  { id: 'planogram',  label: 'Planogram' },
+  { id: 'fsc',        label: 'FSC™ Denetim' },
+  { id: 'referanslar',label: 'Referanslar' },
+  { id: 'iletisim',   label: 'İletişim' },
+]
+
+function SectionNav() {
+  const [active, setActive] = useState(0)
+  const [visible, setVisible] = useState(false)
+  const [tooltip, setTooltip] = useState(null)
+
+  useEffect(() => {
+    setTimeout(() => setVisible(true), 1000)
+    const handleScroll = () => {
+      const scrollY = window.scrollY + window.innerHeight / 2
+      let current = 0
+      NAV_SECTIONS.forEach((s, i) => {
+        const el = document.getElementById(s.id)
+        if (el && el.offsetTop <= scrollY) current = i
+      })
+      setActive(current)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  return (
+    <div
+      className="hidden lg:flex flex-col items-center gap-2.5"
+      style={{
+        position: 'fixed',
+        right: '24px',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        zIndex: 200,
+        opacity: visible ? 1 : 0,
+        transition: 'opacity 0.6s ease',
+      }}
+    >
+      {NAV_SECTIONS.map((s, i) => (
+        <div
+          key={s.id}
+          style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
+          onMouseEnter={() => setTooltip(i)}
+          onMouseLeave={() => setTooltip(null)}
+        >
+          {/* Tooltip */}
+          {tooltip === i && (
+            <div
+              style={{
+                position: 'absolute',
+                right: '22px',
+                whiteSpace: 'nowrap',
+                backgroundColor: 'rgba(5,8,15,0.92)',
+                color: '#f97316',
+                fontSize: '10px',
+                fontWeight: '700',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                padding: '4px 10px',
+                borderRadius: '6px',
+                border: '1px solid rgba(249,115,22,0.3)',
+                pointerEvents: 'none',
+              }}
+            >
+              {s.label}
+            </div>
+          )}
+
+          {/* Dot */}
+          <button
+            onClick={() => scrollTo(s.id)}
+            style={{
+              width: active === i ? '12px' : '8px',
+              height: active === i ? '12px' : '8px',
+              borderRadius: '50%',
+              backgroundColor: active === i ? '#f97316' : 'transparent',
+              border: `1.5px solid ${active === i ? '#f97316' : 'rgba(249,115,22,0.4)'}`,
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              padding: 0,
+              display: 'block',
+              boxShadow: active === i ? '0 0 8px rgba(249,115,22,0.5)' : 'none',
+            }}
+            onMouseEnter={e => {
+              if (active !== i) e.currentTarget.style.backgroundColor = 'rgba(249,115,22,0.4)'
+            }}
+            onMouseLeave={e => {
+              if (active !== i) e.currentTarget.style.backgroundColor = 'transparent'
+            }}
+          />
+        </div>
+      ))}
+    </div>
+  )
+}
+
 export default function App() {
   const [scrolled, setScrolled] = useState(false)
   const [statsVisible, setStatsVisible] = useState(false)
@@ -640,7 +748,7 @@ export default function App() {
             {/* Tag */}
             <div className="inline-flex items-center gap-2 px-4 py-2 mb-10 text-[10px] font-black tracking-[0.3em] uppercase rounded-full" style={{ color: '#fb923c', backgroundColor: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.25)' }}>
               <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: '#f97316' }} />
-              Endüstriyel Dijital Dönüşüm Uzmanlığı
+              Endüstriyel Dijital Dönüşüm Uzmanları
             </div>
 
             {/* Headline */}
@@ -1207,6 +1315,7 @@ export default function App() {
         </div>
       </footer>
       <WhatsAppWidget />
+      <SectionNav />
     </main>
   )
 }
