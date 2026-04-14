@@ -566,6 +566,20 @@ function SectionNav() {
   const [visible, setVisible] = useState(false)
   const [tooltip, setTooltip] = useState(null)
 
+  // Hangi bölümlerin arka planı beyaz
+  const WHITE_BG_SECTIONS = ['erp', 'planogram', 'fsc', 'tedarik', 'uretim']
+
+  const isWhiteBg = WHITE_BG_SECTIONS.includes(NAV_SECTIONS[active]?.id)
+
+  const dotColor        = isWhiteBg ? 'rgba(15,23,42,0.25)'  : 'rgba(255,255,255,0.25)'
+  const dotBorder       = isWhiteBg ? 'rgba(15,23,42,0.5)'   : 'rgba(255,255,255,0.5)'
+  const dotActive       = isWhiteBg ? '#0f172a'               : '#ffffff'
+  const boxBg           = isWhiteBg ? 'rgba(0,0,0,0.06)'      : 'rgba(255,255,255,0.08)'
+  const boxBorder       = isWhiteBg ? 'rgba(0,0,0,0.12)'      : 'rgba(255,255,255,0.15)'
+  const tooltipBg       = isWhiteBg ? 'rgba(15,23,42,0.95)'   : 'rgba(255,255,255,0.95)'
+  const tooltipColor    = isWhiteBg ? '#ffffff'                : '#1e293b'
+  const glowColor       = isWhiteBg ? 'rgba(15,23,42,0.4)'    : 'rgba(255,255,255,0.5)'
+
   useEffect(() => {
     setTimeout(() => setVisible(true), 1000)
     const handleScroll = () => {
@@ -595,12 +609,12 @@ function SectionNav() {
         transform: 'translateY(-50%)',
         zIndex: 200,
         opacity: visible ? 1 : 0,
-        transition: 'opacity 0.6s ease',
-        backgroundColor: 'rgba(255,255,255,0.08)',
+        transition: 'opacity 0.5s ease, background-color 0.5s ease, border-color 0.5s ease',
+        backgroundColor: boxBg,
         backdropFilter: 'blur(10px)',
         borderRadius: '20px',
         padding: '10px 8px',
-        border: '1px solid rgba(255,255,255,0.15)',
+        border: `1px solid ${boxBorder}`,
       }}
     >
       {NAV_SECTIONS.map((s, i) => (
@@ -610,54 +624,53 @@ function SectionNav() {
           onMouseEnter={() => setTooltip(i)}
           onMouseLeave={() => setTooltip(null)}
         >
-          {/* Tooltip */}
           {tooltip === i && (
             <div
               style={{
                 position: 'absolute',
                 right: '26px',
                 whiteSpace: 'nowrap',
-                backgroundColor: 'rgba(255,255,255,0.95)',
-                color: '#1e293b',
+                backgroundColor: tooltipBg,
+                color: tooltipColor,
                 fontSize: '10px',
                 fontWeight: '700',
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
                 padding: '5px 12px',
                 borderRadius: '8px',
-                border: '1px solid rgba(255,255,255,0.3)',
+                border: `1px solid ${boxBorder}`,
                 pointerEvents: 'none',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+                transition: 'all 0.3s ease',
               }}
             >
               {s.label}
             </div>
           )}
 
-          {/* Dot */}
           <button
             onClick={() => scrollTo(s.id)}
             style={{
               width: active === i ? '14px' : '10px',
               height: active === i ? '14px' : '10px',
               borderRadius: '50%',
-              backgroundColor: active === i ? '#ffffff' : 'rgba(255,255,255,0.25)',
-              border: `2px solid ${active === i ? '#ffffff' : 'rgba(255,255,255,0.5)'}`,
+              backgroundColor: active === i ? dotActive : dotColor,
+              border: `2px solid ${active === i ? dotActive : dotBorder}`,
               cursor: 'pointer',
-              transition: 'all 0.3s ease',
+              transition: 'all 0.4s ease',
               padding: 0,
               display: 'block',
-              boxShadow: active === i ? '0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.2)' : 'none',
+              boxShadow: active === i ? `0 0 10px ${glowColor}, 0 0 20px ${glowColor}` : 'none',
             }}
             onMouseEnter={e => {
               if (active !== i) {
-                e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.6)'
+                e.currentTarget.style.backgroundColor = isWhiteBg ? 'rgba(15,23,42,0.5)' : 'rgba(255,255,255,0.6)'
                 e.currentTarget.style.transform = 'scale(1.2)'
               }
             }}
             onMouseLeave={e => {
               if (active !== i) {
-                e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.25)'
+                e.currentTarget.style.backgroundColor = dotColor
                 e.currentTarget.style.transform = 'scale(1)'
               }
             }}
@@ -760,7 +773,7 @@ export default function App() {
             {/* Tag */}
             <div className="inline-flex items-center gap-2 px-4 py-2 mb-10 text-[10px] font-black tracking-[0.3em] uppercase rounded-full" style={{ color: '#fb923c', backgroundColor: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.25)' }}>
               <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: '#f97316' }} />
-              Endüstriyel Dijital Dönüşüm Uzmanlığı
+              Endüstriyel Dijital Dönüşüm Uzmanları
             </div>
 
             {/* Headline */}
