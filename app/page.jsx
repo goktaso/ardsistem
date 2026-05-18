@@ -715,7 +715,7 @@ export default function App() {
         <div className="container mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
           <button onClick={() => scroll('top')} className="flex items-center group">
-            <img src="/ard_logo.png" alt="ARD Sistem Logo" style={{ height: '90px', width: 'auto' }} />
+            <img src="/ard_logo11.png" alt="ARD Sistem Logo" style={{ height: '90px', width: 'auto' }} />
           </button>
 
           {/* Desktop Nav */}
@@ -1323,7 +1323,7 @@ export default function App() {
       <footer className="py-14 border-t border-white/10" style={{ backgroundColor: '#0d1117' }}>
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           <div>
-            <img src="/ard_logo.png" alt="ARD Sistem Logo" style={{ height: '70px', width: 'auto' }} />
+            <img src="/ard_logo11.png" alt="ARD Sistem Logo" style={{ height: '70px', width: 'auto' }} />
           </div>
           <div className="flex flex-wrap justify-center gap-8 text-[9px] font-black uppercase tracking-widest" style={{ color: '#94a3b8' }}>
             {NAV_LINKS.map(l => (
