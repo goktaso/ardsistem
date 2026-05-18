@@ -715,7 +715,7 @@ export default function App() {
         <div className="container mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
           <button onClick={() => scroll('top')} className="flex items-center group">
-            <img src="/ard_logo.png" alt="ARD Sistem Logo" style={{ height: '90px', width: 'auto' }} />
+            <img src="/ard_logo1.png" alt="ARD Sistem Logo" style={{ height: '90px', width: 'auto' }} />
           </button>
 
           {/* Desktop Nav */}
