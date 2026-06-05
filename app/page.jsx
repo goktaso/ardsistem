@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react'
 const BRAND = {
   name: "Özay Göktaş",
   phone: "+90 532 302 02 50",
-  email: "iletisim@ardsistem.net.tr",
+  email: "ozaygoktas@ardsistem.net.tr",
   address: "İzmir, Türkiye",
   whatsapp: "+905323020250"
 }
@@ -14,8 +14,10 @@ const NAV_LINKS = [
   { label: "Çözümler", id: "cozumler" },
   { label: "Tedarik Zinciri", id: "tedarik" },
   { label: "Üretim Planlama", id: "uretim" },
+  { label: "Raporlama", id: "raporlama" },
   { label: "ERP Entegrasyon", id: "erp" },
   { label: "Planogram", id: "planogram" },
+  { label: "FSC", id: "fsc" },
   { label: "Referanslar", id: "referanslar" },
 ]
 
@@ -176,7 +178,6 @@ function useCountUp(end, duration = 1500, start = false) {
 
 function StatCard({ value, label, animate }) {
   const numeric = parseInt(value.replace(/\D/g, ''))
-  const prefix = value.replace(/[\d+%]/g, '').trim()
   const suffix = value.includes('%') ? '%' : value.includes('+') ? '+' : ''
   const count = useCountUp(value, 1800, animate)
   const display = numeric ? `${count}${suffix}` : value
@@ -203,9 +204,9 @@ function ServicesPanel() {
   const s = SERVICES[active]
   const metrics = SERVICE_METRICS[s.id]
   return (
-    <div className="flex flex-col lg:flex-row gap-0 rounded-[2.5rem] overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.07)' }}>
+    <div className="flex flex-col lg:flex-row lg:items-stretch gap-0 rounded-[2.5rem] overflow-hidden min-h-[760px]" style={{ border: '1px solid rgba(255,255,255,0.07)' }}>
       {/* LEFT: Tab list */}
-      <div className="lg:w-72 shrink-0" style={{ backgroundColor: 'rgba(5,10,20,0.95)' }}>
+      <div className="lg:w-72 shrink-0 flex flex-col justify-center" style={{ backgroundColor: 'rgba(5,10,20,0.95)' }}>
         <div className="p-6 border-b" style={{ borderColor: 'rgba(255,255,255,0.05)' }}>
           <div className="text-[8px] font-black uppercase tracking-[0.4em]" style={{ color: '#64748b' }}>Hizmet Alanları</div>
         </div>
@@ -237,7 +238,7 @@ function ServicesPanel() {
       </div>
 
       {/* RIGHT: Detail panel */}
-      <div className="flex-1 p-10 lg:p-14 flex flex-col justify-between" style={{ backgroundColor: 'rgba(10,16,30,0.97)' }}>
+      <div className="flex-1 p-10 lg:p-14 flex flex-col h-full justify-between" style={{ backgroundColor: 'rgba(10,16,30,0.97)' }}>
         {/* Header */}
         <div>
           <div className="flex items-start justify-between mb-8">
@@ -281,6 +282,8 @@ function WhatsAppWidget() {
   useEffect(() => { setTimeout(() => setVisible(true), 2500) }, [])
 
   const canSend = selected.length > 0
+  const allSelected = selected.length === SERVICE_OPTIONS.length
+  const toggleAll = () => setSelected(allSelected ? [] : SERVICE_OPTIONS.map(s => s.id))
   const waUrl = canSend ? `https://wa.me/${BRAND.whatsapp}?text=${buildWAMessage(selected)}` : '#'
 
   return (
@@ -309,6 +312,28 @@ function WhatsAppWidget() {
           {/* Service selector */}
           <div className="px-4 py-4" style={{ backgroundColor: '#f0f2f5', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
             <div className="text-[10px] font-black uppercase tracking-widest mb-3" style={{ color: '#475569' }}>Hangi hizmeti görüşelim?</div>
+
+            <button
+              onClick={toggleAll}
+              className="mb-3 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest transition-all"
+              style={{ color: allSelected ? '#f97316' : '#64748b' }}
+            >
+              <span style={{
+                width: 15,
+                height: 15,
+                borderRadius: 4,
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: allSelected ? '#f97316' : 'transparent',
+                border: `1.5px solid ${allSelected ? '#f97316' : '#cbd5e1'}`,
+                flexShrink: 0,
+              }}>
+                {allSelected && <span style={{ color: '#fff', fontSize: 8, fontWeight: 900 }}>✓</span>}
+              </span>
+              {allSelected ? 'Seçimi Kaldır' : 'Tümünü Seç'}
+            </button>
+
             <div className="space-y-1.5 max-h-52 overflow-y-auto pr-1">
               {SERVICE_OPTIONS.map(svc => {
                 const checked = selected.includes(svc.id)
@@ -366,7 +391,8 @@ function WhatsAppWidget() {
         style={{
           backgroundColor: '#25D366',
           padding: open ? '1rem' : '1rem 1.5rem',
-          boxShadow: '0 8px 32px rgba(37,211,102,0.35)',
+          border: '1px solid rgba(255,255,255,0.25)',
+          boxShadow: '0 10px 34px rgba(37,211,102,0.4)',
         }}
         onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
         onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
@@ -419,7 +445,7 @@ function ServiceCheckboxes({ selected, onChange, theme = "dark" }) {
       <button
         onClick={toggleAll}
         className="mb-4 flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-all"
-        style={{ color: allSelected ? '#f97316' : isDark ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)' }}
+        style={{ color: allSelected ? '#f97316' : isDark ? 'rgba(255,255,255,0.72)' : 'rgba(0,0,0,0.4)' }}
       >
         <span style={{
           display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
@@ -442,7 +468,7 @@ function ServiceCheckboxes({ selected, onChange, theme = "dark" }) {
               style={{
                 backgroundColor: checked
                   ? isDark ? 'rgba(249,115,22,0.15)' : 'rgba(249,115,22,0.1)'
-                  : isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)',
+                  : isDark ? 'rgba(255,255,255,0.09)' : 'rgba(0,0,0,0.04)',
                 border: checked
                   ? '1.5px solid rgba(249,115,22,0.6)'
                   : isDark ? '1.5px solid rgba(255,255,255,0.07)' : '1.5px solid rgba(0,0,0,0.08)',
@@ -457,7 +483,7 @@ function ServiceCheckboxes({ selected, onChange, theme = "dark" }) {
                 {checked && <span style={{ color: '#fff', fontSize: 10, fontWeight: 900, lineHeight: 1 }}>✓</span>}
               </span>
               <span style={{ fontSize: 16 }}>{svc.icon}</span>
-              <span className="text-xs font-bold" style={{ color: checked ? (isDark ? '#fff' : '#111') : isDark ? '#64748b' : '#475569' }}>
+              <span className="text-xs font-bold" style={{ color: checked ? (isDark ? '#fff' : '#111') : isDark ? 'rgba(255,255,255,0.78)' : '#475569' }}>
                 {svc.label}
               </span>
             </button>
@@ -475,7 +501,7 @@ function ContactSelector() {
   const mailUrl = `mailto:${BRAND.email}?subject=${encodeURIComponent('Hizmet Talebi — ARD Sistem')}&body=${buildMailBody(selected)}`
 
   return (
-    <div className="max-w-4xl mx-auto rounded-[2.5rem] overflow-hidden" style={{ backgroundColor: 'rgba(0,0,0,0.25)', border: '1px solid rgba(255,255,255,0.15)' }}>
+    <div className="max-w-4xl mx-auto rounded-[2.5rem] overflow-hidden" style={{ backgroundColor: 'rgba(6,12,28,0.88)', border: '1px solid rgba(255,255,255,0.2)' }}>
       <div className="p-8 md:p-12">
         {/* Step 1 */}
         <div className="flex items-center gap-3 mb-6">
@@ -493,7 +519,7 @@ function ContactSelector() {
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-3 gap-4 pb-8 md:pb-12">
             {/* WhatsApp */}
             <a
               href={canContact ? waUrl : undefined}
@@ -507,6 +533,7 @@ function ContactSelector() {
                 opacity: canContact ? 1 : 0.4,
                 cursor: canContact ? 'pointer' : 'not-allowed',
                 border: '1.5px solid transparent',
+                pointerEvents: canContact ? 'auto' : 'none',
               }}
             >
               <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
@@ -526,6 +553,7 @@ function ContactSelector() {
                 color: canContact ? '#ea580c' : '#fff',
                 opacity: canContact ? 1 : 0.4,
                 cursor: canContact ? 'pointer' : 'not-allowed',
+                pointerEvents: canContact ? 'auto' : 'none',
               }}
             >
               <span style={{ fontSize: 24 }}>✉️</span>
@@ -535,8 +563,13 @@ function ContactSelector() {
             {/* Telefon */}
             <a
               href={`tel:${BRAND.phone}`}
-              className="flex flex-col items-center gap-3 rounded-2xl py-6 px-4 text-center font-black text-sm uppercase tracking-wider transition-all text-white"
-              style={{ backgroundColor: 'rgba(255,255,255,0.12)', border: '1.5px solid rgba(255,255,255,0.2)' }}
+              className="flex flex-col items-center gap-3 rounded-2xl py-6 px-4 text-center font-black text-sm uppercase tracking-wider transition-all duration-300 text-white"
+              style={{
+                backgroundColor: canContact ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.08)',
+                border: '1.5px solid rgba(255,255,255,0.2)',
+                opacity: canContact ? 1 : 0.4,
+                pointerEvents: canContact ? 'auto' : 'none',
+              }}
             >
               <span style={{ fontSize: 24 }}>📞</span>
               {BRAND.phone}
@@ -555,8 +588,8 @@ const NAV_SECTIONS = [
   { id: 'tedarik',    label: 'Tedarik Zinciri' },
   { id: 'uretim',     label: 'Üretim Planlama' },
   { id: 'erp',        label: 'ERP Entegrasyon' },
-  { id: 'planogram',  label: 'Planogram' },
   { id: 'fsc',        label: 'FSC™ Denetim' },
+  { id: 'planogram',  label: 'Planogram' },
   { id: 'referanslar',label: 'Referanslar' },
   { id: 'iletisim',   label: 'İletişim' },
 ]
@@ -604,16 +637,17 @@ function SectionNav() {
       className="hidden lg:flex flex-col items-center gap-3"
       style={{
         position: 'fixed',
-        right: '20px',
+        right: '32px',
         top: '50%',
         transform: 'translateY(-50%)',
         zIndex: 200,
         opacity: visible ? 1 : 0,
         transition: 'opacity 0.5s ease, background-color 0.5s ease, border-color 0.5s ease',
         backgroundColor: boxBg,
-        backdropFilter: 'blur(10px)',
+        backdropFilter: 'blur(12px)',
         borderRadius: '20px',
         padding: '10px 8px',
+        boxShadow: '0 10px 28px rgba(0,0,0,0.22)',
         border: `1px solid ${boxBorder}`,
       }}
     >
@@ -721,11 +755,11 @@ export default function App() {
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-8">
             {NAV_LINKS.map(l => (
-              <button key={l.id} onClick={() => scroll(l.id)} className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-orange-400 transition-colors">{l.label}</button>
+              <button key={l.id} onClick={() => scroll(l.id)} className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 hover:text-orange-300 transition-colors">{l.label}</button>
             ))}
             <button
               onClick={() => scroll('iletisim')}
-              className="bg-orange-600 text-white px-7 py-3 rounded-full font-black text-[10px] uppercase tracking-[0.2em] hover:bg-orange-500 transition-all shadow-lg shadow-orange-600/25 flex items-center gap-2">
+              className="bg-orange-600 text-white px-7 py-3 rounded-full font-black text-[10px] uppercase tracking-[0.2em] hover:bg-orange-500 transition-all shadow-lg shadow-orange-600/30 flex items-center gap-2">
               <span className="animate-pulse">●</span> Ücretsiz Analiz
             </button>
           </div>
@@ -768,7 +802,7 @@ export default function App() {
         <div className="absolute top-1/4 right-0 w-[700px] h-[700px] rounded-full z-0" style={{ background: 'radial-gradient(circle, rgba(234,88,12,0.12) 0%, transparent 70%)' }} />
         <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full z-0" style={{ background: 'radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%)' }} />
 
-        <div className="relative z-10 container mx-auto px-6 pt-28 pb-20">
+        <div className="relative z-10 container mx-auto px-6 pt-28 pb-24 md:pb-28">
           <div className="max-w-6xl">
             {/* Tag */}
             <div className="inline-flex items-center gap-2 px-4 py-2 mb-10 text-[10px] font-black tracking-[0.3em] uppercase rounded-full" style={{ color: '#fb923c', backgroundColor: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.25)' }}>
@@ -777,13 +811,13 @@ export default function App() {
             </div>
 
             {/* Headline */}
-            <h1 className="font-black leading-[0.88] tracking-tighter uppercase mb-10" style={{ fontSize: 'clamp(3rem, 10vw, 9rem)', color: '#ffffff' }}>
+            <h1 className="font-black leading-[0.9] tracking-tighter uppercase mb-10" style={{ fontSize: 'clamp(2.6rem, 8.5vw, 8rem)', color: '#ffffff', maxWidth: '1100px' }}>
               Operasyonun<br />
               <span className="italic" style={{ color: '#f97316' }}>Her Katmanı</span><br />
               Kontrol Altında
             </h1>
 
-            <p className="text-lg md:text-2xl font-light leading-relaxed max-w-3xl mb-14" style={{ color: '#94a3b8' }}>
+            <p className="text-lg md:text-2xl font-light leading-relaxed max-w-3xl mb-14" style={{ color: '#cbd5e1' }}>
               Tedarik zincirinden depoya, üretim planlamadan ERP entegrasyonuna, planogramdan raporlamaya — operasyonlarınızın her katmanını gerçek veriyle yönetmenizi sağlıyoruz.
             </p>
 
@@ -791,7 +825,7 @@ export default function App() {
             <div className="flex flex-wrap gap-5">
               <button onClick={() => scroll('cozumler')}
                 className="flex items-center gap-3 group font-black text-base rounded-full transition-all"
-                style={{ backgroundColor: '#ea580c', color: '#ffffff', padding: '1.25rem 2.5rem' }}
+                style={{ backgroundColor: '#ea580c', color: '#ffffff', padding: '1.25rem 2.5rem', boxShadow: '0 14px 30px rgba(234,88,12,0.3)' }}
                 onMouseEnter={e => e.currentTarget.style.backgroundColor = '#f97316'}
                 onMouseLeave={e => e.currentTarget.style.backgroundColor = '#ea580c'}>
                 Çözümleri İncele
@@ -799,7 +833,7 @@ export default function App() {
               </button>
               <button onClick={() => scroll('neden-biz')}
                 className="font-black text-base rounded-full transition-all"
-                style={{ border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff', padding: '1.25rem 2.5rem' }}
+                style={{ border: '1px solid rgba(255,255,255,0.2)', color: '#ffffff', padding: '1.25rem 2.5rem', backgroundColor: 'rgba(2,6,23,0.35)' }}
                 onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)'}
                 onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
                 Neden Biz?
@@ -836,7 +870,7 @@ export default function App() {
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <div>
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-500">Neden ARD Sistem?</span>
+              <span className="inline-flex px-3 py-1 rounded-md text-xs font-bold uppercase tracking-[0.15em] text-orange-600 bg-orange-50">Neden ARD Sistem?</span>
               <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mt-4 mb-8">
                 Teoriyle Değil<br /><span className="text-orange-500 italic">Sahada</span> Öğrendik
               </h2>
@@ -871,7 +905,7 @@ export default function App() {
                 className="relative z-10 w-full rounded-[2.5rem] object-cover"
                 style={{ height: '520px', boxShadow: '0 32px 80px rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)' }}
               />
-              <div className="absolute bottom-6 left-6 right-6 z-20 p-5 rounded-2xl" style={{ backgroundColor: 'rgba(5,8,15,0.85)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <div className="absolute bottom-6 left-6 right-6 z-20 p-5 rounded-2xl rounded-b-[2.5rem]" style={{ backgroundColor: 'rgba(5,8,15,0.85)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.1)' }}>
                 <div className="grid grid-cols-3 gap-4">
                   {[{ v: "↓ 28%", l: "Stok Fazlası" }, { v: "↑ 45%", l: "Sevkiyat Hızı" }, { v: "↓ 19%", l: "İade Oranı" }].map((m, i) => (
                     <div key={i} className="text-center">
@@ -891,7 +925,7 @@ export default function App() {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
             <div>
-              <span className="text-[10px] font-black uppercase tracking-[0.4em]" style={{ color: '#f97316' }}>Hizmet Alanlarımız</span>
+              <span className="inline-flex px-3 py-1 rounded-md text-xs font-bold uppercase tracking-[0.15em] text-orange-600 bg-orange-50">Hizmet Alanlarımız</span>
               <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mt-4" style={{ color: '#fff' }}>
                 Uçtan Uca<br /><span style={{ color: '#f97316', fontStyle: 'italic' }}>Çözüm Paketi</span>
               </h2>
@@ -909,7 +943,7 @@ export default function App() {
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <div>
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-600">Tedarik Zinciri Yönetimi</span>
+              <span className="inline-flex px-3 py-1 rounded-md text-xs font-bold uppercase tracking-[0.15em] text-orange-600 bg-orange-50">Tedarik Zinciri Yönetimi</span>
               <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mt-4 mb-8">
                 Tedarikten<br /><span className="text-orange-600 italic">Teslimata</span><br />Tam Kontrol
               </h2>
@@ -934,8 +968,8 @@ export default function App() {
               <div className="grid grid-cols-3 gap-4 mt-10 p-6 rounded-2xl bg-orange-50 border border-orange-100">
                 {[{ v: "↓32%", l: "Stok Kesintisi" }, { v: "↑28%", l: "Sipariş İsabeti" }, { v: "↓18%", l: "Lojistik Maliyet" }].map((m, i) => (
                   <div key={i} className="text-center">
-                    <div className="text-2xl font-black text-orange-600">{m.v}</div>
-                    <div className="text-[8px] uppercase tracking-widest font-bold text-slate-500 mt-1">{m.l}</div>
+              <div className="text-2xl font-black" style={{ color: '#1e293b' }}>{m.v}</div>
+              <div className="text-[8px] uppercase tracking-widest font-bold mt-1" style={{ color: '#334155' }}>{m.l}</div>
                   </div>
                 ))}
               </div>
@@ -972,8 +1006,8 @@ export default function App() {
                 <div className="grid grid-cols-3 gap-3">
                   {[{ v: "↑38%", l: "OEE Artışı" }, { v: "↓25%", l: "Duruş Süresi" }, { v: "↑42%", l: "Kapasite" }].map((m, i) => (
                     <div key={i} className="text-center">
-                      <div className="text-xl font-black text-white">{m.v}</div>
-                      <div className="text-[8px] uppercase tracking-widest font-bold mt-1" style={{ color: '#475569' }}>{m.l}</div>
+                      <div className="text-xl font-black" style={{ color: '#1e293b' }}>{m.v}</div>
+                      <div className="text-[8px] uppercase tracking-widest font-bold mt-1" style={{ color: '#334155' }}>{m.l}</div>
                     </div>
                   ))}
                 </div>
@@ -981,7 +1015,7 @@ export default function App() {
             </div>
 
             <div className="order-1 lg:order-2">
-              <span className="text-[10px] font-black uppercase tracking-[0.4em]" style={{ color: '#e879f9' }}>Üretim Planlama</span>
+              <span className="inline-flex px-3 py-1 rounded-md text-xs font-bold uppercase tracking-[0.15em] text-fuchsia-700 bg-fuchsia-50">Üretim Planlama</span>
               <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mt-4 mb-8">
                 Sahayı<br /><span className="italic" style={{ color: '#e879f9' }}>Tam Kontrolde</span><br />Tut
               </h2>
@@ -1008,12 +1042,65 @@ export default function App() {
         </div>
       </section>
 
+      {/* ── RAPORLAMA & İŞ ZEKASI ── */}
+      <section id="raporlama" className="py-32 bg-white border-t border-slate-100 text-slate-900">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <div>
+              <span className="inline-flex px-3 py-1 rounded-md text-xs font-bold uppercase tracking-[0.15em] text-violet-700 bg-violet-50">Raporlama & İş Zekası</span>
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mt-4 mb-8">
+                Veriyi<br /><span className="text-violet-600 italic">Karara Dönüştür</span>
+              </h2>
+              <p className="text-xl text-slate-500 font-light leading-relaxed mb-10">
+                Operasyonel dashboardlardan yönetim raporlarına kadar tüm veriyi tek yapıda topluyoruz. Doğru veri, doğru anda, doğru kişiye ulaşır.
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {[
+                  'Gerçek zamanlı KPI dashboardları',
+                  'Özelleştirilebilir yönetici raporları',
+                  'Trend analizi ve sapma raporları',
+                  'Power BI / Excel entegrasyonu',
+                  'Otomatik periyodik raporlama',
+                  'Çok boyutlu satış & stok analizleri',
+                ].map((p, i) => (
+                  <div key={i} className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-violet-200 hover:bg-violet-50/50 transition-all group">
+                    <div className="w-2 h-2 rounded-full bg-violet-500" />
+                    <span className="text-sm font-bold text-slate-700 group-hover:text-violet-700 transition-colors">{p}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative rounded-[2.5rem] overflow-hidden" style={{ backgroundColor: '#0f172a', border: '1px solid rgba(139,92,246,0.25)' }}>
+              <div className="p-8 md:p-10">
+                <div className="text-[9px] font-black uppercase tracking-[0.3em] mb-6" style={{ color: '#a78bfa' }}>Örnek KPI Paneli</div>
+                <div className="grid grid-cols-3 gap-4 mb-6">
+                  {[{ v: '↑60%', l: 'Karar Hızı' }, { v: '7/24', l: 'Canlı İzleme' }, { v: '100%', l: 'Özelleştirme' }].map((m, i) => (
+                    <div key={i} className="rounded-2xl p-4 text-center" style={{ backgroundColor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                      <div className="text-2xl font-black" style={{ color: '#c4b5fd' }}>{m.v}</div>
+                      <div className="text-[8px] uppercase tracking-widest font-bold mt-1" style={{ color: '#94a3b8' }}>{m.l}</div>
+                    </div>
+                  ))}
+                </div>
+                <div className="h-40 rounded-2xl p-4" style={{ backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                  <div className="h-full flex items-end gap-3">
+                    {[35, 52, 41, 68, 57, 76, 63].map((h, i) => (
+                      <div key={i} className="flex-1 rounded-t-md" style={{ height: `${h}%`, background: 'linear-gradient(to top, #8b5cf6, #c4b5fd)' }} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── ERP ENTEGRASYON DEEP-DIVE ── */}
       <section id="erp" className="py-32 bg-white text-slate-900">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <div>
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-600">ERP Sistem Entegrasyonu</span>
+              <span className="inline-flex px-3 py-1 rounded-md text-xs font-bold uppercase tracking-[0.15em] text-emerald-700 bg-emerald-50">ERP Sistem Entegrasyonu</span>
               <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mt-4 mb-8">
                 Sistemler<br /><span className="text-emerald-600 italic">Birbirine Konuşsun</span>
               </h2>
@@ -1113,64 +1200,12 @@ export default function App() {
         </div>
       </section>
 
-      {/* ── PLANOGRAM ── */}
-      <section id="planogram" className="py-32 bg-white border-t border-slate-100 text-slate-900">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-24 items-center">
-            {/* Visual first on desktop */}
-            <div className="order-2 lg:order-1 relative">
-              <img
-                src="/planogram.png"
-                alt="Planogram saha uygulaması"
-                className="w-full rounded-[2.5rem] object-cover"
-                style={{ height: '480px', boxShadow: '0 24px 60px rgba(0,0,0,0.15)', border: '1px solid rgba(245,158,11,0.2)' }}
-              />
-              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(12px)', border: '1px solid rgba(245,158,11,0.2)' }}>
-                <div className="text-[8px] font-black uppercase tracking-[0.3em] text-amber-600 mb-2">Raf Optimizasyonu Sonrası</div>
-                <div className="grid grid-cols-3 gap-3">
-                  {[{ v: "↑ %31", l: "Satış Artışı" }, { v: "↓ %15", l: "Ölü Stok" }, { v: "↑ %23", l: "Kategori Geliri" }].map((m, i) => (
-                    <div key={i} className="text-center">
-                      <div className="text-lg font-black text-amber-600">{m.v}</div>
-                      <div className="text-[8px] uppercase tracking-widest font-bold text-slate-500">{m.l}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="order-1 lg:order-2">
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-amber-600">Planogram Yönetimi</span>
-              <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mt-4 mb-8">
-                Her Raf,<br /><span className="text-amber-600 italic">Maksimum Satış</span>
-              </h2>
-              <p className="text-xl text-slate-500 font-light leading-relaxed mb-10">
-                Ürünlerin rafta nerede durduğu satışları doğrudan etkiler. Veri odaklı planogram stratejileriyle satış başına raf verimliliğini artırıyoruz.
-              </p>
-              <div className="space-y-4">
-                {[
-                  "Satış verisiyle desteklenen raf planlaması",
-                  "Kategori yönetimi ve segment analizi",
-                  "Mevsimsel & kampanya planogram güncellemesi",
-                  "Dijital planogram arşivi ve şube senkronizasyonu",
-                  "Göz hizası ve çapraz satış optimizasyonu",
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3 text-sm font-bold text-slate-700">
-                    <span className="w-6 h-6 rounded-full bg-amber-100 border border-amber-200 flex items-center justify-center text-amber-600 text-xs shrink-0">✓</span>
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ── FSC ── */}
       <section id="fsc" className="py-32 bg-white border-t border-slate-100 text-slate-900">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <div>
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-green-600">Ambalaj Sektörü Uzmanlığı</span>
+              <span className="inline-flex px-3 py-1 rounded-md text-xs font-bold uppercase tracking-[0.15em] text-green-700 bg-green-50">Ambalaj Sektörü Uzmanlığı</span>
               <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mt-4 mb-8">
                 FSC™ Denetimlerine<br /><span className="text-green-600 italic">Dijital Hazırlık</span>
               </h2>
@@ -1212,11 +1247,63 @@ export default function App() {
         </div>
       </section>
 
+      {/* ── PLANOGRAM ── */}
+      <section id="planogram" className="py-32 bg-white border-t border-slate-100 text-slate-900">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            {/* Visual first on desktop */}
+            <div className="order-2 lg:order-1 relative">
+              <img
+                src="/planogram.png"
+                alt="Planogram saha uygulaması"
+                className="w-full rounded-[2.5rem] object-cover"
+                style={{ height: '480px', boxShadow: '0 24px 60px rgba(0,0,0,0.15)', border: '1px solid rgba(245,158,11,0.2)' }}
+              />
+              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(12px)', border: '1px solid rgba(245,158,11,0.2)' }}>
+                <div className="text-[8px] font-black uppercase tracking-[0.3em] text-amber-600 mb-2">Raf Optimizasyonu Sonrası</div>
+                <div className="grid grid-cols-3 gap-3">
+                  {[{ v: "↑ %31", l: "Satış Artışı" }, { v: "↓ %15", l: "Ölü Stok" }, { v: "↑ %23", l: "Kategori Geliri" }].map((m, i) => (
+                    <div key={i} className="text-center">
+                      <div className="text-lg font-black text-amber-600">{m.v}</div>
+                      <div className="text-[8px] uppercase tracking-widest font-bold text-slate-500">{m.l}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="order-1 lg:order-2">
+              <span className="inline-flex px-3 py-1 rounded-md text-xs font-bold uppercase tracking-[0.15em] text-amber-700 bg-amber-50">Planogram Yönetimi</span>
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mt-4 mb-8">
+                Her Raf,<br /><span className="text-amber-600 italic">Maksimum Satış</span>
+              </h2>
+              <p className="text-xl text-slate-500 font-light leading-relaxed mb-10">
+                Ürünlerin rafta nerede durduğu satışları doğrudan etkiler. Veri odaklı planogram stratejileriyle satış başına raf verimliliğini artırıyoruz.
+              </p>
+              <div className="space-y-4">
+                {[
+                  "Satış verisiyle desteklenen raf planlaması",
+                  "Kategori yönetimi ve segment analizi",
+                  "Mevsimsel & kampanya planogram güncellemesi",
+                  "Dijital planogram arşivi ve şube senkronizasyonu",
+                  "Göz hizası ve çapraz satış optimizasyonu",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3 text-sm font-bold text-slate-700">
+                    <span className="w-6 h-6 rounded-full bg-amber-100 border border-amber-200 flex items-center justify-center text-amber-600 text-xs shrink-0">✓</span>
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── SÜREÇ ── */}
       <section className="py-32">
         <div className="container mx-auto px-6">
           <div className="text-center mb-20">
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-500">Nasıl Çalışıyoruz?</span>
+            <span className="inline-flex px-3 py-1 rounded-md text-xs font-bold uppercase tracking-[0.15em] text-orange-600 bg-orange-50">Nasıl Çalışıyoruz?</span>
             <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mt-4">
               4 Adımda<br /><span className="text-orange-500 italic">Dönüşüm</span>
             </h2>
@@ -1242,25 +1329,12 @@ export default function App() {
       <section id="referanslar" className="py-32 border-y border-white/5" style={{ backgroundColor: 'rgba(2,6,23,0.9)' }}>
         <div className="container mx-auto px-6">
           <div className="text-center mb-20">
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-500">İş Ortaklarımız</span>
+            <span className="inline-flex px-3 py-1 rounded-md text-xs font-bold uppercase tracking-[0.15em] text-orange-600 bg-orange-50">İş Ortaklarımız</span>
             <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mt-4">
               Güvendikleri<br /><span className="text-orange-500 italic">Firmalar</span>
             </h2>
           </div>
 
-          {/* Hero image */}
-          <div className="relative rounded-[2.5rem] overflow-hidden mb-14" style={{ height: '360px' }}>
-            <img src="/depo_stok.png" alt="ARD Sistem referans operasyon" className="w-full h-full object-cover" style={{ opacity: 0.7 }} />
-            <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(2,6,23,0.95) 0%, rgba(2,6,23,0.4) 60%, transparent 100%)' }} />
-            <div className="absolute inset-0 flex items-center px-14">
-              <div>
-                <div className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-500 mb-4">20+ Yıl Saha Deneyimi</div>
-                <div className="text-4xl md:text-5xl font-black text-white uppercase tracking-tight leading-tight max-w-lg">
-                  Teoriyle Değil,<br /><span className="text-orange-400">Sahada</span> Kanıtladık
-                </div>
-              </div>
-            </div>
-          </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {PARTNERS.map((p, i) => (
