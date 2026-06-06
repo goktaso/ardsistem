@@ -16,8 +16,8 @@ const NAV_LINKS = [
   { label: "Üretim Planlama", id: "uretim" },
   { label: "Raporlama", id: "raporlama" },
   { label: "ERP Entegrasyon", id: "erp" },
-  { label: "Planogram", id: "planogram" },
   { label: "FSC", id: "fsc" },
+  { label: "Planogram", id: "planogram" },
   { label: "Referanslar", id: "referanslar" },
 ]
 

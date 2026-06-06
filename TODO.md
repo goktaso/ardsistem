@@ -1,5 +1,8 @@
 # TODO
 
+- [x] Header/Footer: Planogram ve FSC menü sıralarını swap et (NAV_LINKS)
+- [x] Değişikliği doğrula (yalnızca header/footer menü etkisi)
+
 - [ ] Uçtan Uca Çözüm Paketi sol-sağ panel dikey hizalama ve yükseklik dengesini düzelt
 - [ ] Açık zeminli KPI kutularında kontrastı (oran/etiket) kurumsal lacivert-antrasit seviyeye çek
 - [ ] Referanslar bölümündeki ara hero görselini kaldır, başarı kartlarını doğrudan grid göster
