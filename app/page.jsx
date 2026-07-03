@@ -1203,7 +1203,7 @@ export default function App() {
               <img
                 src="/planogram.png"
                 alt="Planogram saha uygulaması"
-                className="w-full rounded-[2.5rem] object-cover aspect-[1635/656] sm:aspect-auto sm:h-[480px]"
+                className="w-full rounded-[2.5rem] object-cover aspect-[1300/656] sm:aspect-auto sm:h-[480px]"
                 style={{ boxShadow: '0 24px 60px rgba(0,0,0,0.15)', border: '1px solid rgba(245,158,11,0.2)' }}
               />
               <div className="relative sm:absolute -mt-8 sm:mt-0 mx-4 sm:mx-0 sm:bottom-6 sm:left-6 sm:right-6 p-4 rounded-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(12px)', border: '1px solid rgba(245,158,11,0.2)' }}>
