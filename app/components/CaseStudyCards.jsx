@@ -13,7 +13,7 @@ const ACCENT = '#26D07C';
 
 const DATA = [
   {
-    sector: 'Perakende · 500+ Mağaza', duration: '4 ay', color: '#26D07C',
+    sector: 'Perakende · 200+ Mağaza', duration: '4 ay', color: '#26D07C',
     title: 'Stok Fazlasının Azaltılması',
     problem: 'Depolarda biriken stok fazlası, artan depolama maliyeti ve nakit akışı baskısı yaratıyordu.',
     solution: 'WMS entegrasyonu ve talep tahmin modeliyle stok seviyeleri gerçek zamanlı optimize edildi; mağaza bazlı sipariş otomasyonu kuruldu.',

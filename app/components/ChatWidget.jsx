@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 /**
- * ChatWidget — "Operasyon Danışmanı" kural-tabanlı sohbet widget'ı.
+ * ChatWidget — "Süreç Danışmanı" kural-tabanlı sohbet widget'ı.
  * Sabit konumlu (fixed) floating button + panel. Gerçek AI yanıtı isterseniz
  * (Claude API vb.) `ask()` fonksiyonunu bir API çağrısıyla değiştirin — bu
  * sürüm hazır soru-cevap çiftleriyle çalışır ve karmaşık sorularda WhatsApp'a yönlendirir.
@@ -10,7 +10,7 @@ import { useState } from 'react';
 
 const WA_NUMBER = '905323020250';
 
-const INTRO = "Merhaba 👋 Ben ARD Sistem operasyon danışmanınızım. Depo, ERP, üretim planlama ya da raporlama konularında hızlı bilgi verebilirim. Aşağıdan bir konu seçin, ya da doğrudan WhatsApp'tan ekibimize yazın.";
+const INTRO = "Merhaba 👋 Ben ARD Sistem süreç danışmanınızım. Depo, ERP, üretim planlama ya da raporlama konularında hızlı bilgi verebilirim. Aşağıdan bir konu seçin, ya da doğrudan WhatsApp'tan ekibimize yazın.";
 
 const QA = {
   depo: { q: 'Depo/stok yönetimi hakkında bilgi almak istiyorum', a: 'WMS entegrasyonumuz stok hareketlerini gerçek zamanlı izler, sayım farklarını otomatik raporlar ve sevkiyat verisini ERP\'nize anlık yansıtır. Ortalama uygulama süresi 2-4 ay.' },
@@ -49,7 +49,7 @@ export default function ChatWidget() {
     <>
       {!open && (
         <button type="button" onClick={toggle} style={{ position: 'fixed', left: 26, bottom: 26, zIndex: 60, display: 'flex', alignItems: 'center', gap: 11, padding: '15px 22px 15px 17px', borderRadius: 99, border: 'none', background: '#38BDF8', color: '#04202B', fontWeight: 700, fontSize: 14.5, cursor: 'pointer', boxShadow: '0 12px 30px rgba(56,189,248,0.35)', fontFamily: "'Manrope', sans-serif" }}>
-          <span style={{ fontSize: 19 }}>💬</span> Operasyon Danışmanı
+          <span style={{ fontSize: 19 }}>💬</span> Süreç Danışmanı
         </button>
       )}
 
@@ -59,7 +59,7 @@ export default function ChatWidget() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
               <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(56,189,248,0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 17 }}>⚙️</div>
               <div>
-                <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: 14, color: '#F2F5F7' }}>Operasyon Danışmanı</div>
+                <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: 14, color: '#F2F5F7' }}>Süreç Danışmanı</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11.5, color: '#26D07C' }}>
                   <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#26D07C' }} />Aktif
                 </div>
