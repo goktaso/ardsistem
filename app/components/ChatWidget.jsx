@@ -60,8 +60,8 @@ export default function ChatWidget() {
       )}
 
       {open && (
-        <div style={{ position: 'fixed', left: 26, bottom: 26, zIndex: 60, width: 360, maxWidth: 'calc(100vw - 40px)', background: '#12181F', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 20, boxShadow: '0 30px 70px rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column', overflow: 'hidden', fontFamily: "'Manrope', sans-serif" }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 18px', background: 'linear-gradient(135deg,#15202A,#101820)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+        <div style={{ position: 'fixed', left: 26, bottom: 26, zIndex: 60, width: 360, maxWidth: 'calc(100vw - 40px)', maxHeight: 'calc(100vh - 52px)', background: '#12181F', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 20, boxShadow: '0 30px 70px rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column', overflow: 'hidden', fontFamily: "'Manrope', sans-serif" }}>
+          <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 18px', background: 'linear-gradient(135deg,#15202A,#101820)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
               <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(56,189,248,0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 17 }}>⚙️</div>
               <div>
@@ -74,7 +74,7 @@ export default function ChatWidget() {
             <button type="button" onClick={toggle} style={{ background: 'rgba(255,255,255,0.06)', border: 'none', color: '#9BA6B2', width: 28, height: 28, borderRadius: 8, fontSize: 16, cursor: 'pointer' }}>×</button>
           </div>
 
-          <div style={{ flex: 1, overflowY: 'auto', padding: 18, display: 'flex', flexDirection: 'column', gap: 12, maxHeight: 360, minHeight: 260 }}>
+          <div style={{ flex: '1 1 auto', minHeight: 0, overflowY: 'auto', padding: 18, display: 'flex', flexDirection: 'column', gap: 12, maxHeight: 360 }}>
             {log.map((m, i) => (
               <div key={i} style={{ display: 'flex', justifyContent: m.from === 'user' ? 'flex-end' : 'flex-start' }}>
                 <div style={{ maxWidth: '82%', padding: '11px 14px', borderRadius: m.from === 'user' ? '14px 14px 4px 14px' : '14px 14px 14px 4px', background: m.from === 'user' ? '#38BDF8' : 'rgba(255,255,255,0.05)', color: m.from === 'user' ? '#04202B' : '#E5EAEF', fontSize: 13.5, lineHeight: 1.5 }}>{m.text}</div>
@@ -90,14 +90,14 @@ export default function ChatWidget() {
           </div>
 
           {!typing && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: '0 18px 16px' }}>
+            <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 8, padding: '0 18px 16px', maxHeight: 160, overflowY: 'auto' }}>
               {Object.keys(QA).map((k) => (
                 <button key={k} type="button" onClick={() => ask(k)} style={{ textAlign: 'left', padding: '11px 14px', borderRadius: 12, border: '1px solid rgba(56,189,248,0.3)', background: 'rgba(56,189,248,0.06)', color: '#9BEBFF', fontFamily: "'Manrope', sans-serif", fontSize: 13, fontWeight: 500, cursor: 'pointer' }}>{QA[k].q}</button>
               ))}
             </div>
           )}
 
-          <div style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+          <div style={{ flexShrink: 0, padding: '14px 18px', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
             <a href={waHref} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '12px 16px', borderRadius: 12, background: '#25D366', color: '#06210F', fontWeight: 700, fontSize: 13.5, textDecoration: 'none' }}>🟢 Gerçek biriyle konuş (WhatsApp)</a>
           </div>
         </div>
