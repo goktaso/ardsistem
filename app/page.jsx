@@ -1007,8 +1007,8 @@ export default function App() {
               <img
                 src="/tedarik_zinciri.png"
                 alt="Tedarik zinciri operasyon"
-                className="w-full rounded-[2.5rem] object-cover"
-                style={{ height: '540px', boxShadow: '0 24px 60px rgba(0,0,0,0.12)', border: '1px solid rgba(249,115,22,0.2)' }}
+                className="w-full rounded-[2.5rem] object-cover aspect-[1635/656] sm:aspect-auto sm:h-[540px]"
+                style={{ boxShadow: '0 24px 60px rgba(0,0,0,0.12)', border: '1px solid rgba(249,115,22,0.2)' }}
               />
               <div className="absolute top-6 left-6 px-4 py-2 rounded-full font-black text-xs uppercase tracking-widest" style={{ backgroundColor: 'rgba(234,88,12,0.9)', color: '#fff' }}>
                 🔗 Supply Chain Control Tower
@@ -1183,8 +1183,8 @@ export default function App() {
               <img
                 src="/fsc.png"
                 alt="FSC denetim uyumu saha"
-                className="w-full rounded-[2.5rem] object-cover"
-                style={{ height: '540px', boxShadow: '0 24px 60px rgba(0,0,0,0.12)', border: '1px solid rgba(34,197,94,0.2)' }}
+                className="w-full rounded-[2.5rem] object-cover aspect-[1637/656] sm:aspect-auto sm:h-[540px]"
+                style={{ boxShadow: '0 24px 60px rgba(0,0,0,0.12)', border: '1px solid rgba(34,197,94,0.2)' }}
               />
               <div className="absolute top-6 left-6 px-4 py-2 rounded-full font-black text-xs uppercase tracking-widest" style={{ backgroundColor: 'rgba(34,197,94,0.9)', color: '#fff' }}>
                 🌿 FSC™ Sertifikalı Süreç
@@ -1203,8 +1203,8 @@ export default function App() {
               <img
                 src="/planogram.png"
                 alt="Planogram saha uygulaması"
-                className="w-full rounded-[2.5rem] object-cover"
-                style={{ height: '480px', boxShadow: '0 24px 60px rgba(0,0,0,0.15)', border: '1px solid rgba(245,158,11,0.2)' }}
+                className="w-full rounded-[2.5rem] object-cover aspect-[1635/656] sm:aspect-auto sm:h-[480px]"
+                style={{ boxShadow: '0 24px 60px rgba(0,0,0,0.15)', border: '1px solid rgba(245,158,11,0.2)' }}
               />
               <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(12px)', border: '1px solid rgba(245,158,11,0.2)' }}>
                 <div className="text-[8px] font-black uppercase tracking-[0.3em] text-amber-600 mb-2">Raf Optimizasyonu Sonrası</div>
