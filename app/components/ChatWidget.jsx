@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 /**
  * ChatWidget — "Süreç Danışmanı" kural-tabanlı sohbet widget'ı.
@@ -23,6 +23,11 @@ export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [typing, setTyping] = useState(false);
   const [log, setLog] = useState([]);
+  const logRef = useRef(null);
+
+  useEffect(() => {
+    if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight;
+  }, [log, typing]);
 
   const toggle = () => {
     const willOpen = !open;
@@ -74,7 +79,7 @@ export default function ChatWidget() {
             <button type="button" onClick={toggle} style={{ background: 'rgba(255,255,255,0.06)', border: 'none', color: '#9BA6B2', width: 28, height: 28, borderRadius: 8, fontSize: 16, cursor: 'pointer' }}>×</button>
           </div>
 
-          <div style={{ flex: '1 1 auto', minHeight: 0, overflowY: 'auto', padding: 18, display: 'flex', flexDirection: 'column', gap: 12, maxHeight: 360 }}>
+          <div ref={logRef} style={{ flex: '1 1 auto', minHeight: 0, overflowY: 'auto', padding: 18, display: 'flex', flexDirection: 'column', gap: 12, maxHeight: 360 }}>
             {log.map((m, i) => (
               <div key={i} style={{ display: 'flex', justifyContent: m.from === 'user' ? 'flex-end' : 'flex-start' }}>
                 <div style={{ maxWidth: '82%', padding: '11px 14px', borderRadius: m.from === 'user' ? '14px 14px 4px 14px' : '14px 14px 14px 4px', background: m.from === 'user' ? '#38BDF8' : 'rgba(255,255,255,0.05)', color: m.from === 'user' ? '#04202B' : '#E5EAEF', fontSize: 13.5, lineHeight: 1.5 }}>{m.text}</div>
