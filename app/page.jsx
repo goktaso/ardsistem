@@ -1206,7 +1206,7 @@ export default function App() {
                 className="w-full rounded-[2.5rem] object-cover aspect-[1635/656] sm:aspect-auto sm:h-[480px]"
                 style={{ boxShadow: '0 24px 60px rgba(0,0,0,0.15)', border: '1px solid rgba(245,158,11,0.2)' }}
               />
-              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(12px)', border: '1px solid rgba(245,158,11,0.2)' }}>
+              <div className="relative sm:absolute -mt-8 sm:mt-0 mx-4 sm:mx-0 sm:bottom-6 sm:left-6 sm:right-6 p-4 rounded-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(12px)', border: '1px solid rgba(245,158,11,0.2)' }}>
                 <div className="text-[8px] font-black uppercase tracking-[0.3em] text-amber-600 mb-2">Raf Optimizasyonu Sonrası</div>
                 <div className="grid grid-cols-3 gap-3">
                   {[{ v: "↑ %31", l: "Satış Artışı" }, { v: "↓ %15", l: "Ölü Stok" }, { v: "↑ %23", l: "Kategori Geliri" }].map((m, i) => (
