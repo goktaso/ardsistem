@@ -1,5 +1,7 @@
 "use client"
 import React, { useState, useEffect, useRef } from 'react'
+import SavingsCalculator from './components/SavingsCalculator'
+import MaturityQuiz from './components/MaturityQuiz'
 
 const BRAND = {
   name: "Özay Göktaş",
@@ -823,6 +825,15 @@ export default function App() {
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-5">
+              <a href={`https://wa.me/${BRAND.whatsapp.replace('+', '')}?text=${encodeURIComponent('Merhaba, ARD Sistem web sitesi üzerinden ücretsiz ön analiz talep etmek istiyorum.')}`}
+                target="_blank" rel="noreferrer"
+                className="flex items-center gap-3 group font-black text-base rounded-full transition-all"
+                style={{ backgroundColor: '#25D366', color: '#ffffff', padding: '1.25rem 2.5rem', boxShadow: '0 14px 30px rgba(37,211,102,0.35)' }}
+                onMouseEnter={e => e.currentTarget.style.backgroundColor = '#22c55e'}
+                onMouseLeave={e => e.currentTarget.style.backgroundColor = '#25D366'}>
+                48 Saatte Ücretsiz Ön Analiz
+                <span className="group-hover:translate-x-1.5 transition-transform inline-block">→</span>
+              </a>
               <button onClick={() => scroll('cozumler')}
                 className="flex items-center gap-3 group font-black text-base rounded-full transition-all"
                 style={{ backgroundColor: '#ea580c', color: '#ffffff', padding: '1.25rem 2.5rem', boxShadow: '0 14px 30px rgba(234,88,12,0.3)' }}
@@ -838,6 +849,15 @@ export default function App() {
                 onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
                 Neden Biz?
               </button>
+            </div>
+
+            {/* Trust badges */}
+            <div className="flex flex-wrap gap-6 mt-8">
+              {['İlk görüşme ücretsiz', 'İzmir merkezli', 'Sahada 20+ yıl'].map(t => (
+                <span key={t} className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest" style={{ color: '#94a3b8' }}>
+                  <span style={{ color: '#f97316' }}>✓</span> {t}
+                </span>
+              ))}
             </div>
 
             {/* Mini badges */}
@@ -1324,6 +1344,12 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {/* ── TASARRUF HESAPLAYICI ── */}
+      <SavingsCalculator />
+
+      {/* ── OPERASYON OLGUNLUK TESTİ ── */}
+      <MaturityQuiz />
 
       {/* ── REFERANSLAR ── */}
       <section id="referanslar" className="py-32 border-y border-white/5" style={{ backgroundColor: 'rgba(2,6,23,0.9)' }}>
