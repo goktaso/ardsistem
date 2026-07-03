@@ -57,6 +57,12 @@ export default function ERPFlowDiagram() {
 
   return (
     <section style={{ fontFamily: "'Manrope', system-ui, sans-serif", background: 'radial-gradient(1000px 520px at 50% -8%, rgba(56,189,248,0.08), transparent 60%), #0A0E12', color: '#F2F5F7', padding: '72px 24px', boxSizing: 'border-box' }}>
+      <style>{`
+        @media (max-width: 860px) {
+          .ard-erp-grid { grid-template-columns: 1fr !important; }
+          .ard-erp-detail { position: static !important; }
+        }
+      `}</style>
       <div style={{ maxWidth: 1180, margin: '0 auto' }}>
         <div style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto 20px' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 14px', border: '1px solid rgba(56,189,248,0.35)', borderRadius: 99, background: 'rgba(56,189,248,0.07)', color: ACCENT, fontSize: 12, fontWeight: 600, letterSpacing: '.06em', textTransform: 'uppercase', marginBottom: 20 }}>
@@ -67,7 +73,7 @@ export default function ERPFlowDiagram() {
           <p style={{ margin: 0, color: '#9BA6B2', fontSize: 16, lineHeight: 1.6 }}>ARD Middleware; depo, üretim, muhasebe ve ERP sisteminizin arasında gerçek zamanlı köprü kurar. Bir katmana dokunun, ne yaptığını görün.</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1.35fr 1fr', gap: 24, alignItems: 'start', marginTop: 44 }}>
+        <div className="ard-erp-grid" style={{ display: 'grid', gridTemplateColumns: '1.35fr 1fr', gap: 24, alignItems: 'start', marginTop: 44 }}>
           <div style={{ background: '#10151B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 24, padding: '36px 28px', boxSizing: 'border-box', overflow: 'hidden' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 14 }}>
               {['wms', 'uretim', 'muhasebe'].map((k) => (
@@ -114,7 +120,7 @@ export default function ERPFlowDiagram() {
             </div>
           </div>
 
-          <div style={{ background: 'linear-gradient(160deg,#12181F 0%,#0F161D 100%)', border: '1px solid rgba(56,189,248,0.22)', borderRadius: 22, padding: 28, boxSizing: 'border-box', position: 'sticky', top: 20 }}>
+          <div className="ard-erp-detail" style={{ background: 'linear-gradient(160deg,#12181F 0%,#0F161D 100%)', border: '1px solid rgba(56,189,248,0.22)', borderRadius: 22, padding: 28, boxSizing: 'border-box', position: 'sticky', top: 20 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
               <span style={{ fontSize: 26 }}>{active.icon}</span>
               <div>

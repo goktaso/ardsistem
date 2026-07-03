@@ -11,17 +11,17 @@ const WA_NUMBER = '905323020250';
 
 const SECTORS = [
   { key: 'perakende', icon: '🛒', label: 'Perakende' },
-  { key: 'uretim', icon: '🏭', label: 'Üretim & İmalat' },
-  { key: 'gida', icon: '🍽️', label: 'Gıda & FMCG' },
-  { key: 'ambalaj', icon: '📦', label: 'Ambalaj & Kağıt' },
+  { key: 'uretim', icon: '🏭', label: 'Üretim & İmalat' },
+  { key: 'gida', icon: '🍽️', label: 'Gıda & FMCG' },
+  { key: 'ambalaj', icon: '📦', label: 'Ambalaj & Kağıt' },
   { key: 'lojistik', icon: '🚚', label: 'Lojistik' },
   { key: 'diger', icon: '🏢', label: 'Diğer' },
 ];
 const NEEDS = [
-  { key: 'depo', icon: '📦', label: 'Depo & Stok Yönetimi' },
+  { key: 'depo', icon: '📦', label: 'Depo & Stok Yönetimi' },
   { key: 'erp', icon: '⚙️', label: 'ERP Entegrasyonu' },
   { key: 'uretimplan', icon: '🏗️', label: 'Üretim Planlama' },
-  { key: 'raporlama', icon: '📊', label: 'Raporlama & İş Zekası' },
+  { key: 'raporlama', icon: '📊', label: 'Raporlama & İş Zekası' },
   { key: 'genel', icon: '🧭', label: 'Nereden başlayacağımdan emin değilim' },
 ];
 
@@ -50,6 +50,11 @@ export default function QuoteWizard() {
 
   return (
     <section style={{ fontFamily: "'Manrope', system-ui, sans-serif", background: 'radial-gradient(1000px 500px at 50% -8%, rgba(38,208,124,0.09), transparent 60%), #0A0E12', color: '#F2F5F7', padding: '72px 24px', boxSizing: 'border-box' }}>
+      <style>{`
+        @media (max-width: 480px) {
+          .ard-qw-sectors { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
       <div style={{ maxWidth: 640, margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: 30 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 14px', border: `1px solid ${ACCENT}59`, borderRadius: 99, background: `${ACCENT}12`, color: ACCENT, fontSize: 12, fontWeight: 600, letterSpacing: '.06em', textTransform: 'uppercase', marginBottom: 20 }}>
@@ -74,10 +79,10 @@ export default function QuoteWizard() {
             <div>
               <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: '#5C6B78', marginBottom: 6 }}>Adım 1 / 3</div>
               <h3 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: 21, margin: '0 0 22px' }}>Hangi sektörde faaliyet gösteriyorsunuz?</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+              <div className="ard-qw-sectors" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                 {SECTORS.map((o) => (
                   <button key={o.key} type="button" onClick={() => { setSector(o.key); setStep(2); }} style={optStyle(o.key, sector, false)}>
-                    <span style={{ fontSize: 20 }}>{o.icon}</span><span>{o.label}</span>
+                    <span style={{ fontSize: 20 }}>{o.icon}</span><span style={{ whiteSpace: 'nowrap' }}>{o.label}</span>
                   </button>
                 ))}
               </div>

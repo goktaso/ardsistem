@@ -47,9 +47,15 @@ export default function ChatWidget() {
 
   return (
     <>
+      <style>{`
+        @media (max-width: 480px) {
+          .ard-chat-fab { padding: 14px !important; }
+          .ard-chat-fab-label { display: none; }
+        }
+      `}</style>
       {!open && (
-        <button type="button" onClick={toggle} style={{ position: 'fixed', left: 26, bottom: 26, zIndex: 60, display: 'flex', alignItems: 'center', gap: 11, padding: '15px 22px 15px 17px', borderRadius: 99, border: 'none', background: '#38BDF8', color: '#04202B', fontWeight: 700, fontSize: 14.5, cursor: 'pointer', boxShadow: '0 12px 30px rgba(56,189,248,0.35)', fontFamily: "'Manrope', sans-serif" }}>
-          <span style={{ fontSize: 19 }}>💬</span> Süreç Danışmanı
+        <button type="button" onClick={toggle} className="ard-chat-fab" style={{ position: 'fixed', left: 26, bottom: 26, zIndex: 60, display: 'flex', alignItems: 'center', gap: 11, padding: '15px 22px 15px 17px', borderRadius: 99, border: 'none', background: '#38BDF8', color: '#04202B', fontWeight: 700, fontSize: 14.5, cursor: 'pointer', boxShadow: '0 12px 30px rgba(56,189,248,0.35)', fontFamily: "'Manrope', sans-serif" }}>
+          <span style={{ fontSize: 19 }}>💬</span> <span className="ard-chat-fab-label">Süreç Danışmanı</span>
         </button>
       )}
 
