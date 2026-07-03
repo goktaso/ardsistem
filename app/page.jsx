@@ -1010,7 +1010,7 @@ export default function App() {
                 className="w-full rounded-[2.5rem] object-cover aspect-[1635/656] sm:aspect-auto sm:h-[540px]"
                 style={{ boxShadow: '0 24px 60px rgba(0,0,0,0.12)', border: '1px solid rgba(249,115,22,0.2)' }}
               />
-              <div className="absolute top-6 left-6 px-4 py-2 rounded-full font-black text-xs uppercase tracking-widest" style={{ backgroundColor: 'rgba(234,88,12,0.9)', color: '#fff' }}>
+              <div className="w-fit mt-3 sm:mt-0 sm:absolute sm:top-6 sm:left-6 px-4 py-2 rounded-full font-black text-xs uppercase tracking-widest" style={{ backgroundColor: 'rgba(234,88,12,0.9)', color: '#fff' }}>
                 🔗 Tedarik Zinciri Kontrol Merkezi
               </div>
             </div>
