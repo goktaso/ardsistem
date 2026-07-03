@@ -1011,7 +1011,7 @@ export default function App() {
                 style={{ boxShadow: '0 24px 60px rgba(0,0,0,0.12)', border: '1px solid rgba(249,115,22,0.2)' }}
               />
               <div className="absolute top-6 left-6 px-4 py-2 rounded-full font-black text-xs uppercase tracking-widest" style={{ backgroundColor: 'rgba(234,88,12,0.9)', color: '#fff' }}>
-                🔗 Supply Chain Control Tower
+                🔗 Tedarik Zinciri Kontrol Merkezi
               </div>
             </div>
           </div>
