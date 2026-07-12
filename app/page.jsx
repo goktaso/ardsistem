@@ -12,7 +12,7 @@ import ChatWidget from './components/ChatWidget'
 
 // FSC tanıtım videosu — YouTube'a yükledikten sonra buraya video ID'sini yaz
 // (linkteki v= sonrası kısım, ör: https://youtu.be/AbC123xyz → 'AbC123xyz')
-const FSC_VIDEO_ID = 'VIDEO_ID'
+const FSC_VIDEO_ID = 'J5paRMtbiKg'
 
 const BRAND = {
   name: "Özay Göktaş",
