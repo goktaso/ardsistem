@@ -10,6 +10,10 @@ import QuoteWizard from './components/QuoteWizard'
 import InsightSection from './components/InsightSection'
 import ChatWidget from './components/ChatWidget'
 
+// FSC tanıtım videosu — YouTube'a yükledikten sonra buraya video ID'sini yaz
+// (linkteki v= sonrası kısım, ör: https://youtu.be/AbC123xyz → 'AbC123xyz')
+const FSC_VIDEO_ID = 'J5paRMtbiKg'
+
 const BRAND = {
   name: "Özay Göktaş",
   phone: "+90 532 302 02 50",
@@ -1150,17 +1154,53 @@ export default function App() {
       {/* ── FSC ── */}
       <section id="fsc" className="py-32 bg-white border-t border-slate-100 text-slate-900">
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-24 items-center">
+
+          {/* Başlık + kanca */}
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <span className="inline-flex px-3 py-1 rounded-md text-xs font-bold uppercase tracking-[0.15em] text-green-700 bg-green-50">Ambalaj Sektörü Uzmanlığı · FSCTakip.Erp</span>
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mt-4 mb-6">
+              Yarın FSC™ Denetimi Olsa<br /><span className="text-green-600 italic">Hazır mısınız?</span>
+            </h2>
+            <p className="text-xl text-slate-500 font-light leading-relaxed">
+              İrsaliyeler, Excel listeleri, dağınık lot numaraları... Denetim gününü krize çevirmeyin.
+              <span className="text-slate-700 font-medium"> FSCTakip.Erp</span> ile hammaddeden sevkiyata tüm FSC süreciniz tek sistemde.
+            </p>
+          </div>
+
+          {/* Video — sahnenin yıldızı */}
+          <div className="max-w-4xl mx-auto mb-6">
+            <div className="relative aspect-video rounded-3xl overflow-hidden bg-slate-900" style={{ boxShadow: '0 30px 70px rgba(22,163,74,0.18)', border: '1px solid rgba(34,197,94,0.25)' }}>
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src={`https://www.youtube-nocookie.com/embed/${FSC_VIDEO_ID}?rel=0&modestbranding=1`}
+                title="FSCTakip.Erp — FSC İzlenebilirlik Tanıtımı"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+            <div className="flex flex-wrap items-center justify-between gap-3 mt-4 px-1">
+              <span className="text-sm font-semibold text-slate-500">🎬 3 dakikalık sesli & alt yazılı tanıtım</span>
+              <span className="inline-flex items-center gap-2 text-sm font-bold text-green-700">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> Ortalama izleme süresi: 3 dk
+              </span>
+            </div>
+          </div>
+
+          {/* 1 dakikada öğrenecekleriniz */}
+          <div className="max-w-4xl mx-auto mb-20 flex flex-wrap justify-center gap-3">
+            {['FSC kod doğrulama', 'Lot & seri takibi', 'Kütle dengesi', 'ERP entegrasyonu', 'Denetim raporları'].map((c, i) => (
+              <span key={i} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-100 text-sm font-bold text-slate-700">
+                <span className="text-green-600">✓</span>{c}
+              </span>
+            ))}
+          </div>
+
+          {/* İki kolon: değer + ERP kutusu */}
+          <div className="grid lg:grid-cols-2 gap-8 items-stretch mb-16">
+            {/* Değer */}
             <div>
-              <span className="inline-flex px-3 py-1 rounded-md text-xs font-bold uppercase tracking-[0.15em] text-green-700 bg-green-50">Ambalaj Sektörü Uzmanlığı</span>
-              <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mt-4 mb-8">
-                FSC™ Denetimlerine<br /><span className="text-green-600 italic">Dijital Hazırlık</span>
-              </h2>
-              <p className="text-xl text-slate-500 font-light leading-relaxed mb-10">
-                Acore Ambalaj gibi sektörün öncü firmalarında uyguladığımız FSC™ standartlarına tam uyumlu dijital takip altyapısını fabrikanıza taşıyoruz. Lot takibi ve kütle balansı artık sizin için bir yük olmaktan çıkacak.
-              </p>
               <div className="space-y-3">
-                {['Kütle Balans Otomasyonu', 'Lot Bazlı Geriye Dönük İzleme', 'FSC Sertifika Kontrol Sistemi', 'Denetim Hazırlık Danışmanlığı'].map((item, i) => (
+                {['Kütle Balans Otomasyonu', 'Lot Bazlı Geriye Dönük İzleme', 'FSC Sertifika Kontrol Sistemi', 'Bobin & Seri Yönetimi', 'Denetim Hazırlık Danışmanlığı'].map((item, i) => (
                   <div key={i} className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-green-200 hover:bg-green-50/50 transition-all">
                     <div className="w-8 h-8 rounded-xl bg-green-100 flex items-center justify-center shrink-0">
                       <span className="text-green-600 font-black text-sm">✓</span>
@@ -1169,7 +1209,7 @@ export default function App() {
                   </div>
                 ))}
               </div>
-              <div className="grid grid-cols-3 gap-4 mt-10 p-6 rounded-2xl bg-green-50 border border-green-100">
+              <div className="grid grid-cols-3 gap-4 mt-6 p-6 rounded-2xl bg-green-50 border border-green-100">
                 {[{ v: "0", l: "Denetim Açığı" }, { v: "100%", l: "Lot İzleme" }, { v: "↓80%", l: "Hazırlık Süresi" }].map((m, i) => (
                   <div key={i} className="text-center">
                     <div className="text-2xl font-black text-green-600">{m.v}</div>
@@ -1179,18 +1219,34 @@ export default function App() {
               </div>
             </div>
 
-            <div className="relative">
-              <img
-                src="/fsc.png"
-                alt="FSC denetim uyumu saha"
-                className="w-full rounded-[2.5rem] object-cover aspect-[1637/656] sm:aspect-auto sm:h-[540px]"
-                style={{ boxShadow: '0 24px 60px rgba(0,0,0,0.12)', border: '1px solid rgba(34,197,94,0.2)' }}
-              />
-              <div className="w-fit mt-3 sm:mt-0 sm:absolute sm:top-6 sm:left-6 px-4 py-2 rounded-full font-black text-xs uppercase tracking-widest" style={{ backgroundColor: 'rgba(34,197,94,0.9)', color: '#fff' }}>
-                🌿 FSC™ Sertifikalı Süreç
+            {/* ERP değiştirmeden */}
+            <div className="p-8 rounded-3xl bg-slate-900 text-white flex flex-col">
+              <span className="inline-flex w-fit px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-[0.15em] text-green-300 bg-green-500/15">Kurulu Düzeninizi Bozmadan</span>
+              <h3 className="text-3xl font-black tracking-tight leading-tight uppercase mt-4 mb-3">
+                Mevcut ERP'nizi<br /><span className="text-green-400 italic">Değiştirmeyin</span>
+              </h3>
+              <p className="text-slate-400 font-light leading-relaxed mb-6">
+                FSCTakip.Erp, kullandığınız sistemle <span className="text-white font-medium">ETL</span> üzerinden konuşur. Çift veri girişi yok, kurulu düzeniniz bozulmaz.
+              </p>
+              <div className="grid grid-cols-3 gap-3 mt-auto">
+                {['SAP', 'Netsis', 'Logo', 'Micro', 'Canias', 'Özel ERP'].map((e, i) => (
+                  <div key={i} className="flex items-center justify-center py-3 rounded-xl bg-white/5 border border-white/10 text-xs font-bold uppercase tracking-wider text-slate-200">
+                    {e}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
+
+          {/* CTA */}
+          <div className="text-center">
+            <a href="#demo" className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-green-600 hover:bg-green-500 text-white font-black text-lg uppercase tracking-wider transition-all hover:-translate-y-0.5" style={{ boxShadow: '0 12px 30px rgba(22,163,74,0.35)' }}>
+              FSC Denetim Demosu Talep Et
+              <span className="text-2xl leading-none">→</span>
+            </a>
+            <p className="text-sm text-slate-400 font-medium mt-4">Size özel demo planlayalım · 2 dakikada başvuru</p>
+          </div>
+
         </div>
       </section>
 
@@ -1312,7 +1368,9 @@ export default function App() {
       <ScopeCards />
 
       {/* ── TEKLİF SİHİRBAZI ── */}
-      <QuoteWizard />
+      <div id="demo">
+        <QuoteWizard />
+      </div>
 
       {/* ── SAHADAN NOTLAR ── */}
       <InsightSection />
