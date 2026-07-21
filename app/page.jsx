@@ -171,29 +171,31 @@ const PROCESS = [
   { num: "04", title: "Ölçüm & Optimizasyon", desc: "Canlıya geçtikten sonra KPI'ları takip eder, sistemi sürekli iyileştiririz." },
 ]
 
-function useCountUp(end, duration = 1500, start = false) {
-  const [count, setCount] = useState(0)
+function useCountUp(target, duration = 1500, start = false) {
+  const [count, setCount] = useState(target)
   useEffect(() => {
-    if (!start) return
-    const numeric = parseInt(end.replace(/\D/g, ''))
-    if (!numeric) return
+    if (!start || !target) return
     let startTime = null
+    let raf
     const step = (ts) => {
       if (!startTime) startTime = ts
       const progress = Math.min((ts - startTime) / duration, 1)
-      setCount(Math.floor(progress * numeric))
-      if (progress < 1) requestAnimationFrame(step)
+      setCount(Math.floor(progress * target))
+      if (progress < 1) raf = requestAnimationFrame(step)
     }
-    requestAnimationFrame(step)
-  }, [start])
+    raf = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(raf)
+  }, [start, target, duration])
   return count
 }
 
 function StatCard({ value, label, animate }) {
-  const numeric = parseInt(value.replace(/\D/g, ''))
-  const suffix = value.includes('%') ? '%' : value.includes('+') ? '+' : ''
-  const count = useCountUp(value, 1800, animate)
-  const display = numeric ? `${count}${suffix}` : value
+  // Only values shaped like "20+" / "%45" are animatable; compound values
+  // like "7/24" must stay literal (parseInt would read them as 724).
+  const m = value.match(/^([^\d]*)(\d+)([^\d]*)$/)
+  const target = m ? parseInt(m[2], 10) : 0
+  const count = useCountUp(target, 1800, animate && !!m)
+  const display = m ? `${m[1]}${count}${m[3]}` : value
   return (
     <div className="text-center">
       <div className="text-4xl md:text-6xl font-black text-orange-500 tabular-nums leading-none">{display}</div>
@@ -242,7 +244,7 @@ function ServicesPanel() {
                 <span className="text-xl shrink-0">{svc.icon}</span>
                 <div>
                   <div className="text-xs font-black uppercase tracking-tight leading-none" style={{ color: isActive ? '#fff' : '#64748b' }}>{svc.title}</div>
-                  <div className="text-[8px] font-bold uppercase tracking-widest mt-0.5" style={{ color: isActive ? svc.color : '#334155' }}>{svc.subtitle}</div>
+                  <div lang="en" className="text-[8px] font-bold uppercase tracking-widest mt-0.5" style={{ color: isActive ? svc.color : '#334155' }}>{svc.subtitle.toLocaleUpperCase('en-US')}</div>
                 </div>
               </div>
             </button>
@@ -256,7 +258,7 @@ function ServicesPanel() {
         <div>
           <div className="flex items-start justify-between mb-8">
             <div>
-              <div className="text-[9px] font-black uppercase tracking-[0.4em] mb-3" style={{ color: s.color }}>{s.subtitle}</div>
+              <div lang="en" className="text-[9px] font-black uppercase tracking-[0.4em] mb-3" style={{ color: s.color }}>{s.subtitle.toLocaleUpperCase('en-US')}</div>
               <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tight leading-none" style={{ color: '#ffffff' }}>{s.title}</h3>
             </div>
             <span className="text-5xl leading-none shrink-0 ml-4">{s.icon}</span>
@@ -294,10 +296,9 @@ function WhatsAppWidget() {
   const [selected, setSelected] = useState([])
   useEffect(() => { setTimeout(() => setVisible(true), 2500) }, [])
 
-  const canSend = selected.length > 0
   const allSelected = selected.length === SERVICE_OPTIONS.length
   const toggleAll = () => setSelected(allSelected ? [] : SERVICE_OPTIONS.map(s => s.id))
-  const waUrl = canSend ? `https://wa.me/${BRAND.whatsapp}?text=${buildWAMessage(selected)}` : '#'
+  const waUrl = `https://wa.me/${BRAND.whatsapp}?text=${buildWAMessage(selected)}`
 
   return (
     <div className={`fixed bottom-8 right-8 z-[999] flex flex-col items-end gap-3 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -378,21 +379,17 @@ function WhatsAppWidget() {
 
           {/* CTA */}
           <a
-            href={canSend ? waUrl : undefined}
-            target={canSend ? "_blank" : undefined}
+            href={waUrl}
+            target="_blank"
             rel="noreferrer"
-            onClick={e => !canSend && e.preventDefault()}
             className="flex items-center justify-center gap-2 py-4 text-sm font-black text-white uppercase tracking-wider transition-all"
-            style={{
-              backgroundColor: canSend ? '#25D366' : '#94a3b8',
-              cursor: canSend ? 'pointer' : 'not-allowed',
-            }}
+            style={{ backgroundColor: '#25D366', cursor: 'pointer' }}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
               <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.561 4.14 1.535 5.874L0 24l6.335-1.51A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.003-1.367l-.36-.214-3.73.888.934-3.617-.234-.37A9.818 9.818 0 1112 21.818z"/>
             </svg>
-            {canSend ? `WhatsApp'ta Başlat (${selected.length} Hizmet)` : 'Önce Hizmet Seçin'}
+            {selected.length > 0 ? `WhatsApp'ta Başlat (${selected.length} Hizmet)` : "WhatsApp'ta Başlat"}
           </a>
         </div>
       )}
@@ -430,6 +427,8 @@ const SERVICE_OPTIONS = [
 ]
 
 function buildWAMessage(selected) {
+  if (selected.length === 0)
+    return encodeURIComponent("Merhaba ARD Sistem, hizmetleriniz hakkında bilgi almak istiyorum. Benimle iletişime geçer misiniz?")
   const names = selected.length === SERVICE_OPTIONS.length
     ? "tüm hizmet alanlarınız"
     : selected.map(id => SERVICE_OPTIONS.find(s => s.id === id)?.label).filter(Boolean).join(", ")
@@ -437,6 +436,8 @@ function buildWAMessage(selected) {
 }
 
 function buildMailBody(selected) {
+  if (selected.length === 0)
+    return encodeURIComponent(`Merhaba,\n\nHizmetleriniz hakkında bilgi almak istiyorum.\n\nLütfen benimle iletişime geçin.\n\nSaygılarımla`)
   const names = selected.length === SERVICE_OPTIONS.length
     ? "Tüm Hizmet Alanları"
     : selected.map(id => SERVICE_OPTIONS.find(s => s.id === id)?.label).filter(Boolean).join("\n• ")
@@ -526,26 +527,22 @@ function ContactSelector() {
         <div className="mt-10 pt-8" style={{ borderTop: '1px solid rgba(255,255,255,0.12)' }}>
           <div className="flex items-center gap-3 mb-6">
             <div className="w-7 h-7 rounded-full flex items-center justify-center font-black text-xs" style={{ backgroundColor: canContact ? '#fff' : 'rgba(255,255,255,0.2)', color: canContact ? '#ea580c' : 'rgba(255,255,255,0.4)', transition: 'all 0.3s' }}>2</div>
-            <div className="font-black text-sm uppercase tracking-widest" style={{ color: canContact ? '#fff' : 'rgba(255,255,255,0.35)' }}>
-              {canContact ? `${selected.length} hizmet seçildi — nasıl ulaşalım?` : "Önce yukarıdan hizmet seçin"}
+            <div className="font-black text-sm uppercase tracking-widest" style={{ color: '#fff' }}>
+              {canContact ? `${selected.length} hizmet seçildi — nasıl ulaşalım?` : "Nasıl ulaşalım? (Hizmet seçimi isteğe bağlı)"}
             </div>
           </div>
 
           <div className="grid sm:grid-cols-3 gap-4 pb-8 md:pb-12">
             {/* WhatsApp */}
             <a
-              href={canContact ? waUrl : undefined}
-              target={canContact ? "_blank" : undefined}
+              href={waUrl}
+              target="_blank"
               rel="noreferrer"
-              onClick={e => !canContact && e.preventDefault()}
               className="flex flex-col items-center gap-3 rounded-2xl py-6 px-4 text-center font-black text-sm uppercase tracking-wider transition-all"
               style={{
-                backgroundColor: canContact ? '#25D366' : 'rgba(255,255,255,0.08)',
+                backgroundColor: '#25D366',
                 color: '#fff',
-                opacity: canContact ? 1 : 0.4,
-                cursor: canContact ? 'pointer' : 'not-allowed',
                 border: '1.5px solid transparent',
-                pointerEvents: canContact ? 'auto' : 'none',
               }}
             >
               <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
@@ -557,15 +554,11 @@ function ContactSelector() {
 
             {/* E-posta */}
             <a
-              href={canContact ? mailUrl : undefined}
-              onClick={e => !canContact && e.preventDefault()}
+              href={mailUrl}
               className="flex flex-col items-center gap-3 rounded-2xl py-6 px-4 text-center font-black text-sm uppercase tracking-wider transition-all"
               style={{
-                backgroundColor: canContact ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.08)',
-                color: canContact ? '#ea580c' : '#fff',
-                opacity: canContact ? 1 : 0.4,
-                cursor: canContact ? 'pointer' : 'not-allowed',
-                pointerEvents: canContact ? 'auto' : 'none',
+                backgroundColor: 'rgba(255,255,255,0.95)',
+                color: '#ea580c',
               }}
             >
               <span style={{ fontSize: 24 }}>✉️</span>
@@ -577,10 +570,8 @@ function ContactSelector() {
               href={`tel:${BRAND.phone}`}
               className="flex flex-col items-center gap-3 rounded-2xl py-6 px-4 text-center font-black text-sm uppercase tracking-wider transition-all duration-300 text-white"
               style={{
-                backgroundColor: canContact ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.08)',
+                backgroundColor: 'rgba(255,255,255,0.12)',
                 border: '1.5px solid rgba(255,255,255,0.2)',
-                opacity: canContact ? 1 : 0.4,
-                pointerEvents: canContact ? 'auto' : 'none',
               }}
             >
               <span style={{ fontSize: 24 }}>📞</span>
@@ -804,7 +795,7 @@ export default function App() {
       <section id="top" className="relative min-h-screen flex items-center overflow-hidden" style={{ backgroundColor: '#05080f' }}>
         {/* BG image */}
         <div className="absolute inset-0 z-0">
-          <img src="/tedarik_zinciri.png" alt="" className="w-full h-full object-cover" style={{ opacity: 0.15 }} />
+          <img src="/tedarik_zinciri.webp" alt="" className="w-full h-full object-cover" style={{ opacity: 0.15 }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, #05080f 50%, transparent 100%)' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #05080f 10%, transparent 60%)' }} />
         </div>
@@ -932,7 +923,7 @@ export default function App() {
             <div className="relative">
               <div className="absolute -inset-4 rounded-[3rem]" style={{ background: 'linear-gradient(135deg, rgba(249,115,22,0.15) 0%, transparent 70%)' }} />
               <img
-                src="/stok.png"
+                src="/stok.webp"
                 alt="ARD Sistem saha operasyonu"
                 className="relative z-10 w-full rounded-[2.5rem] object-cover"
                 style={{ height: '520px', boxShadow: '0 32px 80px rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)' }}
@@ -1009,7 +1000,7 @@ export default function App() {
 
             <div className="relative">
               <img
-                src="/tedarik_zinciri.png"
+                src="/tedarik_zinciri.webp"
                 alt="Tedarik zinciri operasyon"
                 className="w-full rounded-[2.5rem] object-cover aspect-[1635/656] sm:aspect-auto sm:h-[540px]"
                 style={{ boxShadow: '0 24px 60px rgba(0,0,0,0.12)', border: '1px solid rgba(249,115,22,0.2)' }}
@@ -1028,7 +1019,7 @@ export default function App() {
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <div className="order-2 lg:order-1 relative">
               <img
-                src="/uretim_planlama.png"
+                src="/uretim_planlama.webp"
                 alt="Üretim planlama saha"
                 className="w-full rounded-[2.5rem] object-cover"
                 style={{ height: '500px', boxShadow: '0 24px 60px rgba(0,0,0,0.12)', border: '1px solid rgba(232,121,249,0.2)' }}
@@ -1257,7 +1248,7 @@ export default function App() {
             {/* Visual first on desktop */}
             <div className="order-2 lg:order-1 relative">
               <img
-                src="/planogram.png"
+                src="/planogram.webp"
                 alt="Planogram saha uygulaması"
                 className="w-full rounded-[2.5rem] object-cover aspect-[1635/656] sm:aspect-auto sm:h-[480px]"
                 style={{ boxShadow: '0 24px 60px rgba(0,0,0,0.15)', border: '1px solid rgba(245,158,11,0.2)' }}
@@ -1432,8 +1423,8 @@ export default function App() {
           <div className="text-center md:text-right">
             <div className="text-[9px] font-bold uppercase tracking-[0.2em] mb-3" style={{ color: '#64748b' }}>© {new Date().getFullYear()} ARD SİSTEM</div>
             <div className="flex gap-4 justify-center md:justify-end text-[9px] font-black uppercase tracking-widest" style={{ color: '#64748b' }}>
-              <a href="#" className="hover:text-slate-300 transition-colors">KVKK</a>
-              <a href="#" className="hover:text-slate-300 transition-colors">Çerez Politikası</a>
+              <a href="/kvkk" className="hover:text-slate-300 transition-colors">KVKK</a>
+              <a href="/cerez-politikasi" className="hover:text-slate-300 transition-colors">Çerez Politikası</a>
             </div>
           </div>
         </div>
